@@ -206,11 +206,11 @@ CARDS = [
     ("bazylia.webp", "Świeża bazylia", 803, 501,
      "Świeże zioła", "Bazylia, mięta, tymianek, rozmaryn – cięte w pęczkach i w doniczkach."),
     ("jarmuz.webp", "Pęczek jarmużu", 802, 803,
-     "Sałaty i liście", "Jarmuż, sałaty, szpinak, rukola i inne zielone liście do kuchni i na kanapki."),
+     "Sałaty i liście", "Jarmuż, sałaty, szpinak, rukola i inne zielone liście dla kuchni restauracyjnych, barów sałatkowych i cateringu."),
     ("bakalie.webp", "Suszone owoce: morele, daktyle, śliwki, jagody goji, żurawina", 1080, 612,
      "Bakalie i suszone owoce", "Morele, daktyle, śliwki, figi, żurawina, goji i orzechy."),
     ("lawenda.webp", "Lawenda w doniczce", 802, 740,
-     "Rośliny w doniczkach", "Sezonowo: lawenda, zioła doniczkowe i rośliny na balkon i parapet."),
+     "Rośliny w doniczkach", "Sezonowo: lawenda i zioła doniczkowe – dla sklepów, kwiaciarni i marketów."),
 ]
 
 
@@ -233,7 +233,7 @@ SEASON = '''
       <div class="section-head">
         <p class="hand">Teraz w sezonie</p>
         <h2>Co teraz najlepsze</h2>
-        <p>Jesienią królują jabłka i śliwki, zimą cytrusy – słodkie mandarynki i soczyste pomarańcze w skrzynkach i na sztuki.</p>
+        <p>Jesienią królują jabłka i śliwki, zimą cytrusy – słodkie mandarynki i soczyste pomarańcze w pełnych skrzynkach, prosto na półkę Twojego sklepu.</p>
       </div>
       <div class="promo-grid">
         <article class="promo">
@@ -249,7 +249,7 @@ SEASON = '''
           <div class="promo-body">
             <span class="tag">Grudzień</span>
             <h3>Czas mandarynek i pomarańczy</h3>
-            <p>Słodkie, soczyste i łatwe do obierania. Dla sklepów – skrzynki, dla domu – tyle, ile potrzebujesz na święta.</p>
+            <p>Słodkie, soczyste i łatwe do obierania. Hurtowe ilości w skrzynkach – zatowaruj sklep przed świętami, kiedy cytrusy schodzą najszybciej.</p>
           </div>
         </article>
         <article class="promo">
@@ -257,7 +257,7 @@ SEASON = '''
           <div class="promo-body">
             <span class="tag tag-red">6 grudnia</span>
             <h3>Zdrowa paczka na Mikołajki</h3>
-            <p>Zamiast słodyczy – owoce. Skompletujemy paczki mikołajkowe dla dzieci, pracowników czy klientów. Zadzwoń i ustal szczegóły.</p>
+            <p>Zamiast słodyczy – owoce. Skompletujemy paczki mikołajkowe dla firm, szkół i przedszkoli – dla pracowników, ich dzieci czy klientów. Zadzwoń i ustal szczegóły.</p>
           </div>
         </article>
       </div>
@@ -269,7 +269,7 @@ def features():
     items = [
         (LEAF_SVG, "Świeży towar", "Dostawy na bieżąco – to, co trafia na półkę, jest jędrne, pachnące i gotowe do sprzedaży."),
         (TRUCK_SVG, "Darmowa dostawa", "Dowozimy za darmo do Legnicy i 9 okolicznych miast – własnymi samochodami."),
-        (PEOPLE_SVG, "Rodzinna firma", "Znamy naszych klientów po imieniu. Doradzimy, odłożymy, pomożemy skompletować zamówienie."),
+        (PEOPLE_SVG, "Rodzinna firma", "Znamy naszych klientów po imieniu. Doradzimy, zarezerwujemy towar i pomożemy skompletować zamówienie."),
     ]
     return '''
   <section class="features">
@@ -290,7 +290,7 @@ home = f'''
       <div class="hero-text">
         <p class="hand">Rodzinna hurtownia z Legnicy</p>
         <h1>Świeża energia<br><span>prosto z pól</span></h1>
-        <p class="lead">Warzywa, owoce, świeże zioła i bakalie – dla sklepów, restauracji i każdego, kto lubi dobre jedzenie. Codziennie wybieramy towar tak, jak dla własnej rodziny.</p>
+        <p class="lead">Warzywa, owoce, świeże zioła i bakalie w hurtowych ilościach – dla sklepów, restauracji, cateringu i firm. Codziennie wybieramy towar tak, jak dla własnej rodziny.</p>
         <div class="hero-cta">
           <a href="tel:+48782272727" class="btn btn-red">Zadzwoń: 782 272 727</a>
           <a href="{WA_URL}" class="btn btn-wa" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a>
@@ -344,8 +344,8 @@ home = f'''
     <div class="wrap visit">
       <div>
         <p class="hand">Zapraszamy</p>
-        <h2>Odwiedź nas przy Bydgoskiej</h2>
-        <p class="muted">Legnica, ul. Bydgoska 18. Wpadnij, zobacz towar na miejscu albo zadzwoń i zamów z dostawą.</p>
+        <h2>Hurtownia przy Bydgoskiej</h2>
+        <p class="muted">Legnica, ul. Bydgoska 18. Odbierz zamówienie w hurtowni albo zadzwoń i zamów z darmową dostawą.</p>
         <div class="contact-cta">
           <a href="kontakt.html" class="btn btn-red">Kontakt i dojazd</a>
           <a href="{FB_URL}" class="btn btn-ghost" target="_blank" rel="noopener">{FB_SVG} Facebook</a>
@@ -355,7 +355,7 @@ home = f'''
   </section>'''
 
 page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
-     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, zioła i bakalie dla sklepów, restauracji i klientów indywidualnych. Darmowa dostawa. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
+     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Darmowa dostawa. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
      home)
 
 # ---------------- ASORTYMENT ----------------
@@ -389,7 +389,7 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
   <section class="section section-tint">
     <div class="wrap ask">
       <h2>Szukasz czegoś konkretnego?</h2>
-      <p class="muted">Zadzwoń – powiemy, co mamy dziś na stanie, i odłożymy towar dla Ciebie.</p>
+      <p class="muted">Zadzwoń – powiemy, co mamy dziś na stanie, i zarezerwujemy towar dla Twojej firmy.</p>
       <div class="contact-cta center"><a href="tel:+48782272727" class="btn btn-red">{PHONE_SVG} 782 272 727</a>
       <a href="{WA_URL}" class="btn btn-wa" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a></div>
     </div>
@@ -493,7 +493,7 @@ page("dla-firm.html", "Oferta dla firm",
 
 # ---------------- O NAS ----------------
 onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span>",
-                 "Rodzinna firma z Legnicy, która od lat dowozi świeże warzywa i owoce do sklepów, restauracji i domów w regionie.",
+                 "Rodzinna firma z Legnicy, która od lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w regionie.",
                  img="stock-mix.webp") + f'''
 
   <section class="section">
@@ -505,7 +505,7 @@ onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span
         <p class="hand">Kim jesteśmy</p>
         <h2>Rodzinnie, po sąsiedzku</h2>
         <p>Hurtownia Sylwia to rodzinna firma z Legnicy. Nie jesteśmy wielką siecią – i dobrze nam z tym. Dzięki temu każdą skrzynkę oglądamy osobiście, a z klientami rozmawiamy jak z sąsiadami.</p>
-        <p>Zaopatrujemy lokalne sklepy, restauracje i kuchnie, ale zapraszamy też wszystkich, którzy chcą kupić dobre warzywa i owoce w rozsądnej cenie.</p>
+        <p>Zaopatrujemy lokalne sklepy, restauracje, stołówki, catering i firmy – w ilościach hurtowych i w hurtowych cenach.</p>
         <ul class="ticks">
           <li>Osobiście wybierany towar</li>
           <li>Uczciwe ceny hurtowe</li>
@@ -553,7 +553,7 @@ page("o-nas.html", "O nas",
 
 # ---------------- KONTAKT ----------------
 kontakt = page_head("Zapraszamy", "Kontakt",
-                    "Zadzwoń, napisz na WhatsApp lub Facebooku albo po prostu wpadnij do hurtowni.") + f'''
+                    "Zadzwoń, napisz na WhatsApp lub Facebooku albo odbierz zamówienie w hurtowni.") + f'''
 
   <section class="section">
     <div class="wrap contact">
