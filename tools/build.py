@@ -6,6 +6,8 @@ import sys, pathlib, json
 OUT = pathlib.Path(sys.argv[1])
 
 FB_URL = "https://www.facebook.com/p/Sylwia-Hurtownia-warzyw-i-owoc%C3%B3w-100070774976242/"
+# Stock photos (img/stock-*.webp) are licensed Adobe Stock previews –
+# replace with the full-resolution files under the same names.
 IG_URL = "#"  # TODO: wstaw adres profilu na Instagramie, gdy powstanie
 
 PHONE_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>'
@@ -230,10 +232,18 @@ SEASON = '''
     <div class="wrap">
       <div class="section-head">
         <p class="hand">Teraz w sezonie</p>
-        <h2>Grudzień pachnie mandarynkami</h2>
-        <p>Zimą stawiamy na cytrusy – słodkie mandarynki i soczyste pomarańcze w skrzynkach i na sztuki.</p>
+        <h2>Co teraz najlepsze</h2>
+        <p>Jesienią królują jabłka i śliwki, zimą cytrusy – słodkie mandarynki i soczyste pomarańcze w skrzynkach i na sztuki.</p>
       </div>
       <div class="promo-grid">
+        <article class="promo">
+          <img src="img/stock-jesien.webp" alt="Wiklinowy kosz z jabłkami, śliwkami i winogronami wśród jesiennych liści" loading="lazy" width="718" height="614">
+          <div class="promo-body">
+            <span class="tag tag-green">Jesień</span>
+            <h3>Jabłka i śliwki z polskich sadów</h3>
+            <p>Chrupiące jabłka, słodkie śliwki i winogrona – najlepsze, co daje polska jesień, prosto do Twojego sklepu i kuchni.</p>
+          </div>
+        </article>
         <article class="promo">
           <img src="img/mandarynki.webp" alt="Mandarynki, laski cynamonu i anyż na drewnianym stole" loading="lazy" width="940" height="425">
           <div class="promo-body">
@@ -350,7 +360,8 @@ page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
 
 # ---------------- ASORTYMENT ----------------
 asort = page_head("Co u nas znajdziesz", "Asortyment",
-                  "Klasyka z polskich pól i trochę egzotyki. Asortyment zmienia się z porami roku – jeśli czegoś szukasz, po prostu zapytaj.") + f'''
+                  "Klasyka z polskich pól i trochę egzotyki. Asortyment zmienia się z porami roku – jeśli czegoś szukasz, po prostu zapytaj.",
+                  img="stock-owoce.webp") + f'''
 
   <section class="section">
     <div class="wrap">
@@ -394,7 +405,8 @@ steps = [
     ("3", "Dowozimy", "Przywozimy zamówienie własnym samochodem – za darmo."),
 ]
 dostawa = page_head("Dowozimy własnymi samochodami", "Darmowa dostawa",
-                    "Nie musisz przyjeżdżać do hurtowni – przywieziemy świeży towar pod drzwi Twojego sklepu, restauracji czy firmy.") + f'''
+                    "Nie musisz przyjeżdżać do hurtowni – przywieziemy świeży towar pod drzwi Twojego sklepu, restauracji czy firmy.",
+                    img="stock-warzywa.webp") + f'''
 
   <section class="section">
     <div class="wrap split">
@@ -459,7 +471,7 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
   <section class="section section-tint">
     <div class="wrap about">
       <div class="about-photo">
-        <img src="img/warzywa-stragan.webp" alt="Pomidory, czerwona cebula, papryka, czosnek i rzodkiewki" loading="lazy" width="1200" height="370" style="aspect-ratio: 4/3">
+        <img src="img/stock-catering.webp" alt="Przygotowanie stołu cateringowego z wędlinami, serami i dodatkami" loading="lazy" width="963" height="294" style="aspect-ratio: 4/3">
       </div>
       <div class="about-text">
         <p class="hand">Dlaczego my</p>
@@ -481,7 +493,8 @@ page("dla-firm.html", "Oferta dla firm",
 
 # ---------------- O NAS ----------------
 onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span>",
-                 "Rodzinna firma z Legnicy, która od lat dowozi świeże warzywa i owoce do sklepów, restauracji i domów w regionie.") + f'''
+                 "Rodzinna firma z Legnicy, która od lat dowozi świeże warzywa i owoce do sklepów, restauracji i domów w regionie.",
+                 img="stock-mix.webp") + f'''
 
   <section class="section">
     <div class="wrap about">

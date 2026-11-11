@@ -272,12 +272,13 @@ p { margin: 0 0 1em; }
 .cities-lg li { font-size: 18px; padding: 10px 20px 10px 14px; }
 
 /* Seasonal promos */
-.promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.promo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .promo { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 0 var(--line); }
 .promo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .promo-body { padding: 24px 28px 30px; }
 .promo-body p { color: var(--muted); margin: 0; }
 .tag { display: inline-block; background: #fdebd3; color: #b05a00; font-weight: 600; font-size: 14px; border-radius: 999px; padding: 3px 12px; margin-bottom: 10px; }
+.tag-green { background: #eef6df; color: var(--green-dark); }
 .tag-red { background: #fbe4e4; color: var(--red-dark); }
 
 /* Steps */
@@ -338,7 +339,7 @@ p { margin: 0 0 1em; }
   .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 300px 180px 200px; }
   .g-tall { grid-row: span 2; }
   .g-wide { grid-column: span 2; }
-  .steps, .who-grid, .footer-grid { grid-template-columns: 1fr; }
+  .steps, .who-grid, .footer-grid, .promo-grid { grid-template-columns: 1fr; }
   .page-hero { padding: 48px 0 44px; }
   .page-hero.has-img { padding: 72px 0 60px; }
 }
