@@ -50,8 +50,8 @@ window.PRODUCTS = [
   { id: "mieta", cat: "salaty", name: "Mięta", emoji: "🌿", img: "../img/mieta.webp", unit: "doniczka", price: 6.0 },
 
   // Kiszonki
-  { id: "kapusta-kisz", cat: "kiszonki", name: "Kapusta kiszona", emoji: "🥬", unit: "kg", price: 5.8 },
-  { id: "ogorek-kisz", cat: "kiszonki", name: "Ogórki kiszone", emoji: "🥒", unit: "kg", price: 9.5 },
+  { id: "kapusta-kisz", cat: "kiszonki", name: "Kapusta kiszona", emoji: "🥬", img: "img/kapusta-kiszona.webp", unit: "kg", price: 5.8 },
+  { id: "ogorek-kisz", cat: "kiszonki", name: "Ogórki kiszone", emoji: "🥒", img: "img/ogorki-kiszone.webp", unit: "kg", price: 9.5 },
 ];
 
 // Demo client – real accounts (with their own price lists) come with login.
