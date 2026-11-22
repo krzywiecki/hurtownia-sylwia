@@ -32,11 +32,11 @@ window.PRODUCTS = [
 
   // Owoce
   { id: "mandarynki", cat: "owoce", name: "Mandarynki", emoji: "🍊", img: "../img/mandarynki.webp", unit: "kg", price: 6.9 },
-  { id: "banan", cat: "owoce", name: "Banany", emoji: "🍌", unit: "kg", price: 5.4 },
-  { id: "sliwki", cat: "owoce", name: "Śliwki", emoji: "🫐", unit: "kg", price: 6.5 },
-  { id: "cytryna", cat: "owoce", name: "Cytryny", emoji: "🍋", unit: "kg", price: 8.0 },
-  { id: "jablka", cat: "owoce", name: "Jabłka", emoji: "🍎", unit: "kg", price: 3.5 },
-  { id: "pomarancze", cat: "owoce", name: "Pomarańcze", emoji: "🍊", unit: "kg", price: 6.2 },
+  { id: "banan", cat: "owoce", name: "Banany", emoji: "🍌", img: "img/banany.webp", unit: "kg", price: 5.4 },
+  { id: "sliwki", cat: "owoce", name: "Śliwki", emoji: "🫐", img: "img/sliwki.webp", unit: "kg", price: 6.5 },
+  { id: "cytryna", cat: "owoce", name: "Cytryny", emoji: "🍋", img: "img/cytryny.webp", unit: "kg", price: 8.0 },
+  { id: "jablka", cat: "owoce", name: "Jabłka", emoji: "🍎", img: "img/jablka.webp", unit: "kg", price: 3.5 },
+  { id: "pomarancze", cat: "owoce", name: "Pomarańcze", emoji: "🍊", img: "img/pomarancze.webp", unit: "kg", price: 6.2 },
   { id: "winogrona", cat: "owoce", name: "Winogrona", emoji: "🍇", unit: "kg", price: 14.0 },
   { id: "miechunka", cat: "owoce", name: "Miechunka", emoji: "🟠", img: "../img/miechunka.webp", unit: "szt", price: 9.0 },
 
