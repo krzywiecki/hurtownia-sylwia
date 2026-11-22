@@ -232,3 +232,4 @@ h2 { font-size: 23px; margin: 28px 0 12px; }
 .line-del { grid-area: del; align-self: start; }
 .line > .line-row { grid-area: row; margin-top: 0; padding-top: 10px; border-top: 1px dashed var(--line); }
 .toast { width: max-content; }
+.add-more { margin-top: 14px; }

@@ -188,6 +188,8 @@
           </button>
         </div>`; }).join("")}
 
+      <a href="#/katalog" class="btn btn-ghost add-more">+ Dodaj produkty</a>
+
       <label class="field"><span>Dzień dostawy</span></label>
       <div class="seg">${opts.map((d, i) => `<button data-day="${iso(d)}" aria-pressed="${iso(d) === cart.delivery}">${i === 0 ? "Jutro" : dayName(d)}<small>${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")}</small></button>`).join("")}</div>
       <label class="field"><span>…lub inny dzień</span><input type="date" id="dday" min="${iso(addDays(1))}" value="${chosenIsPreset ? "" : cart.delivery}"></label>
