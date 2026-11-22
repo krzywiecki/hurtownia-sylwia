@@ -42,7 +42,7 @@ window.PRODUCTS = [
 
   // Sałaty i zioła
   { id: "salata-lod", cat: "salaty", name: "Sałata lodowa", emoji: "🥬", img: "img/salata-lodowa.webp", unit: "karton", price: 55.0 },
-  { id: "rukola", cat: "salaty", name: "Rukola", emoji: "🌿", unit: "karton", price: 38.0 },
+  { id: "rukola", cat: "salaty", name: "Rukola", emoji: "🌿", img: "img/rukola.webp", unit: "karton", price: 38.0 },
   { id: "jarmuz", cat: "salaty", name: "Jarmuż", emoji: "🥬", img: "../img/jarmuz.webp", unit: "kg", price: 16.0 },
   { id: "koper", cat: "salaty", name: "Koper", emoji: "🌿", unit: "kg", price: 18.0 },
   { id: "natka", cat: "salaty", name: "Natka pietruszki", emoji: "🌿", unit: "pęczek", price: 2.5 },
