@@ -196,7 +196,7 @@
       <label class="field"><span>Uwagi do zamówienia</span><textarea id="dnote" rows="2" placeholder="np. wejście od zaplecza">${esc(cart.note)}</textarea></label>
       <label class="field"><span>Nazwa lokalu / firmy</span><input id="dcomp" autocomplete="organization" placeholder="np. Berlin Doner Kebap, Galeria Piastów" value="${esc(profile.company)}"></label>
 
-      <div class="total"><span>Razem (szac.)</span><span>${money(cartTotal())}</span></div>
+      <div class="total"><span>Razem (szac.)</span><span id="ctotal">${money(cartTotal())}</span></div>
       <p class="muted small" style="margin-top:0">Ceny według Twojego cennika. Kwota końcowa wg wagi na fakturze.</p>
       <button class="btn btn-red" data-act="submit" style="margin-top:12px">Wyślij zamówienie ✓</button>
       <button class="btn btn-light" data-act="clear" style="margin-top:10px">Wyczyść koszyk</button>`;
@@ -334,12 +334,23 @@
     if (act === "inc" || act === "dec") {
       const it = cart.items[t.dataset.id]; if (!it) return;
       const n = +(it.qty + (act === "inc" ? 1 : -1)).toFixed(2);
-      if (n > 0) { it.qty = n; persistCart(); renderCart(); }
+      if (n > 0) {
+        it.qty = n; persistCart();
+        // update just this row (re-rendering the basket would reload the photos and make them blink)
+        const p = byId[t.dataset.id], row = t.closest(".line");
+        row.querySelector(".line-qty").textContent = qtyText(n, p.unit);
+        row.querySelector(".line-price").textContent = money(price(p) * n);
+        row.querySelector('[data-act="dec"]').disabled = n - 1 <= 0;
+        document.getElementById("ctotal").textContent = money(cartTotal());
+      }
       return;
     }
     if (act === "del") {
       const p = byId[t.dataset.id];
-      if (confirm(`Usunąć z zamówienia: ${p.name}?`)) { delete cart.items[t.dataset.id]; persistCart(); toast(`Usunięto: ${p.name}`); renderCart(); }
+      delete cart.items[t.dataset.id]; persistCart(); toast(`Usunięto: ${p.name}`);
+      if (!cartLines().length) return renderCart();
+      t.closest(".line").remove();   // remove in place – no re-render, no blinking photos
+      document.getElementById("ctotal").textContent = money(cartTotal());
       return;
     }
     if (act === "clear" && confirm("Wyczyścić cały koszyk?")) { cart.items = {}; persistCart(); renderCart(); }
