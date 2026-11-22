@@ -2,6 +2,11 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
+  <script>
+    // Some hosts serve /zamow/ as /zamow (no trailing slash) – pin relative URLs to the app folder.
+    (function () { var p = location.pathname.replace(/index\.html$/, "");
+      document.write('<base href="' + (p.slice(-1) === "/" ? p : p + "/") + '">'); })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Hurtownia Sylwia – zamówienia</title>
   <meta name="description" content="Zamawiaj warzywa i owoce w Hurtowni Sylwia – szybko, z telefonu.">
