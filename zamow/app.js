@@ -2,7 +2,6 @@
 (() => {
   "use strict";
 
-  const PHONE_WA = "48782272727";
   const KEY = { orders: "sylwia.orders.v1", cart: "sylwia.cart.v1", profile: "sylwia.profile.v1" };
   const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
   const $view = document.getElementById("view");
@@ -170,21 +169,25 @@
       <h1>Twoje zamówienie</h1>
       <p class="muted small" style="margin-top:0">Dotknij pozycji, żeby zmienić ilość.</p>
       ${lines.map(([id, it]) => { const p = byId[id]; return `
-        <button class="line" data-prod="${id}">
-          ${pic(p, "")}
-          <div class="line-main"><div class="line-name">${esc(p.name)}</div>${it.note ? `<div class="line-note">${esc(it.note)}</div>` : ""}</div>
-          <div class="line-qty">${qtyText(it.qty, p.unit)}<small>${money(price(p) * it.qty)}</small></div>
+        <button class="line" data-prod="${id}" aria-label="Zmień: ${esc(p.name)}">
+          ${pic(p, "sm")}
+          <div class="line-main">
+            <div class="line-name">${esc(p.name)}</div>
+            ${it.note ? `<div class="line-note">${esc(it.note)}</div>` : ""}
+            <div class="line-row"><b class="line-qty">${qtyText(it.qty, p.unit)}</b><span class="line-price">${money(price(p) * it.qty)}</span></div>
+          </div>
+          <span class="line-edit" aria-hidden="true">✎</span>
         </button>`; }).join("")}
 
       <label class="field"><span>Dzień dostawy</span></label>
-      <div class="seg">${opts.map((d, i) => `<button data-day="${iso(d)}" aria-pressed="${iso(d) === cart.delivery}">${i === 0 ? "Jutro" : dayName(d)}<br><small>${dateShort(d)}</small></button>`).join("")}</div>
+      <div class="seg">${opts.map((d, i) => `<button data-day="${iso(d)}" aria-pressed="${iso(d) === cart.delivery}">${i === 0 ? "Jutro" : dayName(d)}<small>${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")}</small></button>`).join("")}</div>
       <label class="field"><span>…lub inny dzień</span><input type="date" id="dday" min="${iso(addDays(1))}" value="${chosenIsPreset ? "" : cart.delivery}"></label>
       <label class="field"><span>Od której godziny ktoś będzie na miejscu?</span>
         <select id="dtime">${hours.map(h => `<option ${h === cart.time ? "selected" : ""}>${h}</option>`).join("")}</select></label>
       <label class="field"><span>Uwagi do zamówienia</span><textarea id="dnote" rows="2" placeholder="np. wejście od zaplecza">${esc(cart.note)}</textarea></label>
       <label class="field"><span>Nazwa lokalu / firmy</span><input id="dcomp" autocomplete="organization" placeholder="np. Berlin Doner Kebap, Galeria Piastów" value="${esc(profile.company)}"></label>
 
-      <div class="total"><span>Razem (szacunkowo)</span><span>${money(cartTotal())}</span></div>
+      <div class="total"><span>Razem (szac.)</span><span>${money(cartTotal())}</span></div>
       <p class="muted small" style="margin-top:0">Ceny według Twojego cennika. Kwota końcowa wg wagi na fakturze.</p>
       <button class="btn btn-red" data-act="submit" style="margin-top:12px">Wyślij zamówienie ✓</button>
       <button class="btn btn-light" data-act="clear" style="margin-top:10px">Wyczyść koszyk</button>`;
@@ -193,13 +196,6 @@
     $view.querySelector("#dtime").addEventListener("change", e => { cart.time = e.target.value; persistCart(); });
     $view.querySelector("#dnote").addEventListener("input", e => { cart.note = e.target.value; persistCart(); });
     $view.querySelector("#dcomp").addEventListener("input", e => { profile.company = e.target.value.trim(); save(KEY.profile, profile); });
-  }
-
-  function orderText(o) {
-    const d = fromIso(o.delivery);
-    return `Zamówienie${o.company ? ` – ${o.company}` : ""}\nDostawa: ${dayName(d)} ${dateShort(d)}, od godz. ${o.time}\n\n` +
-      o.items.map(it => `${it.name} – ${qtyText(it.qty, it.unit)}${it.note ? ` (${it.note})` : ""}`).join("\n") +
-      (o.note ? `\n\nUwagi: ${o.note}` : "");
   }
 
   function renderOrder(id) {
@@ -217,7 +213,6 @@
         <div class="total" style="margin-bottom:0"><span>Razem (szac.)</span><span>${money(o.total)}</span></div>
       </div>
       <div class="stack" style="margin-top:16px">
-        <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/${PHONE_WA}?text=${encodeURIComponent(orderText(o))}">Wyślij też na WhatsApp</a>
         <button class="btn btn-green" data-act="repeat" data-id="${o.id}">↻ Zamów to samo jeszcze raz</button>
         <a href="#/" class="btn btn-ghost">Wróć na start</a>
       </div>`;
@@ -244,7 +239,7 @@
     $sheet.innerHTML = `<div class="sheet-inner">
       <div class="sheet-head">${pic(p, "sm")}<div><h3>${esc(p.name)}</h3><div class="muted">${money2(price(p))} / ${p.unit}</div></div>
         <button class="sheet-close" data-s="close" aria-label="Zamknij">×</button></div>
-      <div class="display" aria-live="polite"><span class="num" id="snum"></span><span class="unit" id="sunit"></span></div>
+      <label class="display"><input class="num" id="snum" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="0" aria-label="Ilość"><span class="unit" id="sunit"></span></label>
       <div class="chips">
         ${last ? `<button class="chip chip-last" data-s="set" data-v="${last.qty}">Jak ostatnio: ${qtyText(last.qty, p.unit)}</button>` : ""}
         ${steps.map(s => `<button class="chip" data-s="add" data-v="${s}">+${s}</button>`).join("")}
@@ -258,9 +253,11 @@
       </div></div>`;
     if (!cur) $sheet.querySelector(".sheet-actions").style.gridTemplateColumns = "1fr";
 
+    let fresh = !!cur;            // first key press replaces the existing amount
+    const $num = $sheet.querySelector("#snum");
     const parsed = () => parseFloat(val.replace(",", ".")) || 0;
-    const draw = () => {
-      $sheet.querySelector("#snum").textContent = val || "0";
+    const draw = (fromInput) => {
+      if (!fromInput) $num.value = val;
       $sheet.querySelector("#sunit").textContent = unitLabel(p.unit, parsed());
       const ok = $sheet.querySelector("#sok");
       ok.textContent = parsed() > 0 ? (cur ? "Zapisz" : "Dodaj do zamówienia") : (cur ? "Usuń z zamówienia" : "Wpisz ilość");
@@ -268,6 +265,14 @@
       ok.style.opacity = ok.disabled ? .5 : 1;
     };
     draw();
+    $num.addEventListener("focus", () => { $num.select(); fresh = false; });
+    $num.addEventListener("input", () => {
+      let v = $num.value.replace(".", ",").replace(/[^0-9,]/g, "");
+      const i = v.indexOf(","); if (i !== -1) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/,/g, "").slice(0, 2);
+      val = v.slice(0, 7); if ($num.value !== val) $num.value = val;
+      draw(true);
+    });
+    $num.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); $sheet.querySelector("#sok").click(); } });
 
     $sheet.onclick = e => {
       if (e.target === $sheet) return close();
@@ -275,10 +280,12 @@
       const a = b.dataset.s, v = b.dataset.v;
       if (a === "close") return close();
       if (a === "key") {
+        if (fresh) { val = ""; fresh = false; }
         if (v === "⌫") val = val.slice(0, -1);
         else if (v === ",") { if (!val.includes(",")) val = (val || "0") + ","; }
         else if (val.length < 6) val = val === "0" ? v : val + v;
       }
+      if (a === "add" || a === "set") fresh = false;
       if (a === "add") val = String(+(parsed() + +v).toFixed(2)).replace(".", ",");
       if (a === "set") val = String(v).replace(".", ",");
       if (a === "remove") { delete cart.items[id]; persistCart(); toast(`Usunięto: ${p.name}`); return close(true); }
@@ -295,6 +302,7 @@
       if (changed) { if (location.hash.startsWith("#/koszyk")) renderCart(); else renderCatalog.redraw?.(); }
     }
     $sheet.showModal();
+    $sheet.querySelector(".sheet-close").focus({ preventScroll: true }); // don't pop the keyboard on open
   }
 
   // ---------- global clicks ----------
