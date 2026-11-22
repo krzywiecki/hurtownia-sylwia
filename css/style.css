@@ -348,3 +348,14 @@ p { margin: 0 0 1em; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* Certificates */
+.certs { padding: 36px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.certs-inner { display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; }
+.cert { display: flex; align-items: center; gap: 16px; }
+.cert p { margin: 0; color: var(--muted); font-size: 16px; max-width: 260px; }
+.cert strong { display: block; font-size: 19px; color: var(--ink); }
+.cert-badge {
+  flex: none; width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--green);
+  display: grid; place-items: center; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.1; color: var(--green-dark);
+}

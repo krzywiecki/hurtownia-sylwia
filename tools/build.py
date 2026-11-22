@@ -32,7 +32,7 @@ CITIES = ["Legnica", "Lubin", "Głogów", "Polkowice", "Jawor", "Złotoryja",
 NAV = [
     ("asortyment.html", "Asortyment"),
     ("dostawa.html", "Dostawa"),
-    ("dla-firm.html", "Dla firm"),
+    ("dla-firm.html", "Oferta dla firm"),
     ("o-nas.html", "O nas"),
     ("kontakt.html", "Kontakt"),
 ]
@@ -265,11 +265,42 @@ SEASON = '''
   </section>'''
 
 
+CERTS = '''
+  <section class="certs">
+    <div class="wrap certs-inner">
+      <div class="cert"><span class="cert-badge">ISO<br>22000</span><p><strong>ISO 22000</strong>System zarządzania bezpieczeństwem żywności</p></div>
+      <div class="cert"><span class="cert-badge">HACCP</span><p><strong>HACCP</strong>Kontrola jakości i higieny na każdym etapie</p></div>
+    </div>
+  </section>'''
+
+
+PEELED = f'''
+  <section class="section" id="obierane">
+    <div class="wrap split">
+      <div>
+        <p class="hand">Gotowe do gotowania</p>
+        <h2>Warzywa obierane</h2>
+        <p class="muted">Obrane ziemniaki, marchew, cebula, buraki i inne warzywa – gotowe do użycia w kuchni. Oszczędzasz czas i ręce do pracy, a my dowozimy je świeże, na konkretny dzień.</p>
+        <ul class="ticks">
+          <li>Dla restauracji, stołówek i cateringu</li>
+          <li>Stałe zamówienia na wybrane dni</li>
+          <li>Pakowane higienicznie, zgodnie z HACCP</li>
+        </ul>
+        <p><a href="tel:+48782272727" class="btn btn-red">Zapytaj o warzywa obierane</a></p>
+      </div>
+      <div class="split-photo">
+        <!-- TODO: zdjęcie warzyw obieranych -->
+        <img src="img/stock-warzywa.webp" alt="Świeże warzywa" loading="lazy">
+      </div>
+    </div>
+  </section>'''
+
+
 def features():
     items = [
         (LEAF_SVG, "Świeży towar", "Dostawy na bieżąco – to, co trafia na półkę, jest jędrne, pachnące i gotowe do sprzedaży."),
-        (TRUCK_SVG, "Darmowa dostawa", "Dowozimy za darmo do Legnicy i 9 okolicznych miast – własnymi samochodami."),
-        (PEOPLE_SVG, "Rodzinna firma", "Znamy naszych klientów po imieniu. Doradzimy, zarezerwujemy towar i pomożemy skompletować zamówienie."),
+        (TRUCK_SVG, "Darmowa dostawa", "Dowozimy za darmo do Legnicy i 9 okolicznych miast, a dostawy realizujemy w całej Południowej Polsce."),
+        (PEOPLE_SVG, "Rodzinna firma od 33 lat", "Znamy naszych klientów po imieniu. Doradzimy, zarezerwujemy towar i pomożemy skompletować zamówienie."),
     ]
     return '''
   <section class="features">
@@ -288,9 +319,9 @@ home = f'''
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <p class="hand">Rodzinna hurtownia z Legnicy</p>
+        <p class="hand">Rodzinna hurtownia z Legnicy – od 33 lat</p>
         <h1>Świeża energia<br><span>prosto z pól</span></h1>
-        <p class="lead">Warzywa, owoce, świeże zioła i bakalie w hurtowych ilościach – dla sklepów, restauracji, cateringu i firm. Codziennie wybieramy towar tak, jak dla własnej rodziny.</p>
+        <p class="lead">Warzywa, owoce, warzywa obierane, świeże zioła i bakalie w hurtowych ilościach – dla sklepów, restauracji, cateringu i firm. Codziennie wybieramy towar tak, jak dla własnej rodziny.</p>
         <div class="hero-cta">
           <a href="tel:+48782272727" class="btn btn-red">Zadzwoń: 782 272 727</a>
           <a href="{WA_URL}" class="btn btn-wa" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a>
@@ -308,6 +339,7 @@ home = f'''
     </div>
   </section>
 {features()}
+{CERTS}
 
   <section class="section">
     <div class="wrap">
@@ -355,7 +387,7 @@ home = f'''
   </section>'''
 
 page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
-     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Darmowa dostawa. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
+     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, warzywa obierane, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Darmowa dostawa. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
      home)
 
 # ---------------- ASORTYMENT ----------------
@@ -368,6 +400,7 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
       {cards(CARDS)}
     </div>
   </section>
+{PEELED}
 {SEASON}
 
   <section class="section">
@@ -395,7 +428,7 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
     </div>
   </section>'''
 page("asortyment.html", "Asortyment",
-     "Warzywa, owoce, świeże zioła, sałaty, bakalie i rośliny w doniczkach – asortyment hurtowni Sylwia w Legnicy.",
+     "Warzywa, owoce, warzywa obierane, świeże zioła, sałaty, bakalie i rośliny w doniczkach – asortyment hurtowni Sylwia w Legnicy.",
      asort)
 
 # ---------------- DOSTAWA ----------------
@@ -416,7 +449,7 @@ dostawa = page_head("Dowozimy własnymi samochodami", "Darmowa dostawa",
         <ul class="cities cities-lg">
 {cities_list()}
         </ul>
-        <p class="muted">Jesteś spoza listy? Zadzwoń – zobaczymy, co da się zrobić.</p>
+        <p class="muted">Jesteś spoza listy? Dostawy realizujemy na terenie całej Południowej Polski – zadzwoń, ustalimy szczegóły.</p>
       </div>
       <div class="split-photo">
         <img src="img/flota.webp" alt="Dwa samochody dostawcze Hurtowni Sylwia z grafiką owoców i warzyw" loading="lazy" width="960" height="720">
@@ -436,20 +469,31 @@ dostawa = page_head("Dowozimy własnymi samochodami", "Darmowa dostawa",
       <p class="center-cta"><a href="tel:+48782272727" class="btn btn-red">{PHONE_SVG} Zamów: 782 272 727</a></p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="hand">Nie tylko okolice Legnicy</p>
+        <h2>Dostawy w całej Południowej Polsce</h2>
+        <p>Regularnie dowozimy towar do firm w Południowej Polsce. Zadzwoń – ustalimy trasę, dni dostaw i warunki.</p>
+        <!-- TODO: opis województw (do uzupełnienia przez właściciela) -->
+      </div>
+    </div>
+  </section>
 {b2b_band()}'''
 page("dostawa.html", "Darmowa dostawa",
-     "Darmowa dostawa warzyw i owoców: Legnica, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Prochowice, Chojnów, Bolesławiec, Jelenia Góra.",
+     "Dostawy warzyw i owoców w całej Południowej Polsce. Darmowa dostawa: Legnica, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Prochowice, Chojnów, Bolesławiec, Jelenia Góra.",
      dostawa, og_image="img/flota.webp")
 
 # ---------------- DLA FIRM ----------------
 who = [
-    (CHEF_SVG, "Restauracje i bary", "Stałe dostawy warzyw, owoców i świeżych ziół – w ilościach, jakich potrzebuje Twoja kuchnia."),
+    (CHEF_SVG, "Restauracje i bary", "Stałe dostawy warzyw, owoców, warzyw obieranych i świeżych ziół – w ilościach, jakich potrzebuje Twoja kuchnia."),
     (STORE_SVG, "Sklepy spożywcze", "Towar gotowy na półkę, w hurtowych cenach. Pomożemy dobrać asortyment pod Twoich klientów."),
     (BOX_SVG, "Catering i stołówki", "Duże zamówienia skompletowane na konkretny dzień – bez szukania towaru po kilku hurtowniach."),
     (CAL_SVG, "Firmy i instytucje", "Owoce do biura, paczki świąteczne i mikołajkowe dla pracowników, dzieci i klientów."),
 ]
 firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><span>Współpracuj z nami!</span>",
-                  "Zaopatrujemy restauracje, sklepy, kawiarnie i catering z Legnicy i okolic. Świeży towar, uczciwe ceny i darmowa dostawa.",
+                  "Zaopatrujemy restauracje, sklepy, kawiarnie i catering w Południowej Polsce. Świeży towar, warzywa obierane, certyfikaty ISO 22000 i HACCP, uczciwe ceny.",
                   img="warzywa-stragan.webp") + '''
 
   <section class="section">
@@ -477,7 +521,9 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
         <p class="hand">Dlaczego my</p>
         <h2>Partner, a nie tylko dostawca</h2>
         <ul class="ticks">
-          <li>Darmowa dostawa do 10 miast regionu</li>
+          <li>Certyfikaty ISO 22000 i HACCP</li>
+          <li>Darmowa dostawa do 10 miast regionu, dostawy w całej Południowej Polsce</li>
+          <li>Warzywa obierane – gotowe do użycia w kuchni</li>
           <li>Stałe zamówienia i stałe pozycje – bez dzwonienia za każdym razem</li>
           <li>Osobiście wybierany, świeży towar</li>
           <li>Uczciwe ceny hurtowe</li>
@@ -486,14 +532,15 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
       </div>
     </div>
   </section>
+{CERTS}
 {b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False)}'''
 page("dla-firm.html", "Oferta dla firm",
-     "Hurtowe dostawy warzyw i owoców dla restauracji, sklepów, cateringu i firm z Legnicy i okolic. Darmowa dostawa.",
+     "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w Południowej Polsce. ISO 22000 i HACCP.",
      firmy, og_image="img/warzywa-stragan.webp")
 
 # ---------------- O NAS ----------------
 onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span>",
-                 "Rodzinna firma z Legnicy, która od lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w regionie.",
+                 "Rodzinna firma z Legnicy, która od 33 lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w regionie.",
                  img="stock-mix.webp") + f'''
 
   <section class="section">
@@ -504,9 +551,12 @@ onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span
       <div class="about-text">
         <p class="hand">Kim jesteśmy</p>
         <h2>Rodzinnie, po sąsiedzku</h2>
-        <p>Hurtownia Sylwia to rodzinna firma z Legnicy. Nie jesteśmy wielką siecią – i dobrze nam z tym. Dzięki temu każdą skrzynkę oglądamy osobiście, a z klientami rozmawiamy jak z sąsiadami.</p>
+        <p>Hurtownia Sylwia to rodzinna firma z Legnicy, działająca od 33 lat. Nie jesteśmy wielką siecią – i dobrze nam z tym. Dzięki temu każdą skrzynkę oglądamy osobiście, a z klientami rozmawiamy jak z sąsiadami.</p>
         <p>Zaopatrujemy lokalne sklepy, restauracje, stołówki, catering i firmy – w ilościach hurtowych i w hurtowych cenach.</p>
+        <!-- TODO: historia firmy (do uzupełnienia przez właściciela) -->
         <ul class="ticks">
+          <li>33 lata doświadczenia</li>
+          <li>Certyfikaty ISO 22000 i HACCP</li>
           <li>Osobiście wybierany towar</li>
           <li>Uczciwe ceny hurtowe</li>
           <li>Doradzimy, co jest teraz najlepsze w sezonie</li>
@@ -514,13 +564,14 @@ onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span
       </div>
     </div>
   </section>
+{CERTS}
 
   <section class="section section-tint">
     <div class="wrap split">
       <div>
         <p class="hand">Nasza flota</p>
         <h2>Rozpoznasz nas na drodze</h2>
-        <p class="muted">Nasze samochody w kolorowych barwach owoców i warzyw codziennie rozwożą towar po Legnicy i okolicy – do Lubina, Głogowa, Polkowic, Jawora, Złotoryi, Prochowic, Chojnowa, Bolesławca i Jeleniej Góry.</p>
+        <p class="muted">Nasze samochody w kolorowych barwach owoców i warzyw codziennie rozwożą towar po Legnicy i okolicy – do Lubina, Głogowa, Polkowic, Jawora, Złotoryi, Prochowic, Chojnowa, Bolesławca i Jeleniej Góry – a także dalej, w całej Południowej Polsce.</p>
         <a href="dostawa.html" class="btn btn-red">Darmowa dostawa</a>
       </div>
       <div class="split-photo">
@@ -548,7 +599,7 @@ onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span
     </div>
   </section>'''
 page("o-nas.html", "O nas",
-     "Hurtownia Sylwia – rodzinna hurtownia warzyw i owoców z Legnicy. Poznaj nas i naszą flotę.",
+     "Hurtownia Sylwia – rodzinna hurtownia warzyw i owoców z Legnicy, od 33 lat. Certyfikaty ISO 22000 i HACCP.",
      onas, og_image="img/flota.webp")
 
 # ---------------- KONTAKT ----------------
@@ -577,7 +628,7 @@ kontakt = page_head("Zapraszamy", "Kontakt",
           </li>
           <li>
             <span class="ci-icon">{TRUCK_SVG}</span>
-            <div><strong>Darmowa dostawa</strong>{", ".join(CITIES)}</div>
+            <div><strong>Darmowa dostawa</strong>{", ".join(CITIES)}<br>Dostawy w całej Południowej Polsce</div>
           </li>
         </ul>
         <div class="contact-cta">
@@ -596,7 +647,7 @@ kontakt = page_head("Zapraszamy", "Kontakt",
     </div>
   </section>'''
 page("kontakt.html", "Kontakt",
-     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Darmowa dostawa w regionie.",
+     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Dostawy w całej Południowej Polsce.",
      kontakt)
 
 print("ok")
