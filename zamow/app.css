@@ -149,25 +149,43 @@ h2 { font-size: 23px; margin: 28px 0 12px; }
 .chip { min-height: 46px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--line); background: #fff; font-weight: 600; font-size: 18px; }
 .chip-last { border-color: var(--green); color: var(--green); background: var(--green-bg); }
 .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.key { min-height: 54px; border-radius: 14px; border: 0; background: #f1ece2; font-size: 28px; font-weight: 600; }
+.key { min-height: 52px; border-radius: 14px; border: 0; background: #f1ece2; font-size: 28px; font-weight: 600; }
 .key:active { background: #e3dac9; }
 .note-in {
   width: 100%; min-height: 52px; margin: 10px 0; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--line); font-size: 18px;
 }
-.sheet-actions { display: grid; grid-template-columns: auto 1fr; gap: 10px; }
+.sheet-actions { display: grid; grid-template-columns: auto 1fr; gap: 10px; position: sticky; bottom: calc(-16px - var(--safe-b)); background: #fff; padding: 8px 0 calc(16px + var(--safe-b)); margin-bottom: calc(-16px - var(--safe-b)); }
 .sheet-actions .btn-remove { width: auto; padding: 0 18px; background: #fff; border: 2px solid var(--red); color: var(--red); font-size: 18px; }
 
 /* Cart */
-.line { display: flex; gap: 12px; align-items: flex-start; width: 100%; background: #fff; border: 0; border-radius: var(--radius); padding: 10px; box-shadow: 0 2px 0 var(--line); text-align: left; }
+.line { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "pic main del" "row row row"; gap: 10px 12px; align-items: start; cursor: pointer; width: 100%; background: #fff; border: 0; border-radius: var(--radius); padding: 10px; box-shadow: 0 2px 0 var(--line); text-align: left; }
 .line + .line { margin-top: 10px; }
 .line .pic { width: 64px; flex: none; border-radius: 12px; font-size: 38px; overflow: hidden; }
 .line-main { flex: 1; min-width: 0; }
 .line-name { font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
 .line-note { font-size: 16px; color: var(--muted); font-style: italic; overflow-wrap: anywhere; margin-top: 2px; }
-.line-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; margin-top: 4px; }
-.line-qty { font-size: 21px; white-space: nowrap; }
+.line-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 10px; margin-top: 4px; }
+.line-qty { font-size: 20px; white-space: nowrap; }
 .line-price { font-size: 16px; color: var(--muted); white-space: nowrap; }
-.line-edit { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: grid; place-items: center; font-size: 18px; align-self: center; }
+.line:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.stepper { display: inline-flex; align-items: center; gap: 8px; }
+.stp {
+  width: 44px; height: 44px; flex: none; border-radius: 50%; border: 2px solid var(--green); background: #fff;
+  color: var(--green); font-size: 26px; font-weight: 600; line-height: 1; display: grid; place-items: center; padding: 0;
+}
+.stp:active { background: var(--green-bg); }
+.stp:disabled { border-color: var(--line); color: #b9b2a6; }
+.line-row .line-qty { min-width: 3.5ch; text-align: center; }
+.line-del {
+  flex: none; align-self: center; width: 46px; height: 46px; border-radius: 12px; border: 2px solid #f1c9c9;
+  background: #fff; display: grid; place-items: center; padding: 0;
+}
+.line-del svg { width: 24px; height: 24px; fill: var(--red); }
+.line-del:active { background: #fdecec; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+.step { min-height: 46px; border-radius: 12px; border: 2px solid var(--green); background: var(--green-bg); color: var(--green); font-weight: 700; font-size: 19px; padding: 0; }
+.step-minus { border-color: #f1c9c9; background: #fff; color: var(--red); }
+.step:active { filter: brightness(.95); }
 .field { display: block; margin-top: 16px; }
 .field > span { display: block; font-weight: 600; margin-bottom: 6px; }
 .field input, .field textarea, .field select {
@@ -208,3 +226,9 @@ h2 { font-size: 23px; margin: 28px 0 12px; }
   .line .pic { width: 52px; }
   .total { font-size: 20px; }
 }
+
+.line > .pic { grid-area: pic; }
+.line-main { grid-area: main; align-self: center; }
+.line-del { grid-area: del; align-self: start; }
+.line > .line-row { grid-area: row; margin-top: 0; padding-top: 10px; border-top: 1px dashed var(--line); }
+.toast { width: max-content; }

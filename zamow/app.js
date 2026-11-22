@@ -169,15 +169,24 @@
       <h1>Twoje zamówienie</h1>
       <p class="muted small" style="margin-top:0">Dotknij pozycji, żeby zmienić ilość.</p>
       ${lines.map(([id, it]) => { const p = byId[id]; return `
-        <button class="line" data-prod="${id}" aria-label="Zmień: ${esc(p.name)}">
+        <div class="line" data-prod="${id}" role="button" tabindex="0" aria-label="Zmień: ${esc(p.name)}">
           ${pic(p, "sm")}
           <div class="line-main">
             <div class="line-name">${esc(p.name)}</div>
             ${it.note ? `<div class="line-note">${esc(it.note)}</div>` : ""}
-            <div class="line-row"><b class="line-qty">${qtyText(it.qty, p.unit)}</b><span class="line-price">${money(price(p) * it.qty)}</span></div>
           </div>
-          <span class="line-edit" aria-hidden="true">✎</span>
-        </button>`; }).join("")}
+            <div class="line-row">
+              <div class="stepper">
+                <button class="stp" data-act="dec" data-id="${id}" aria-label="Mniej: ${esc(p.name)}" ${it.qty - 1 <= 0 ? "disabled" : ""}>−</button>
+                <b class="line-qty">${qtyText(it.qty, p.unit)}</b>
+                <button class="stp" data-act="inc" data-id="${id}" aria-label="Więcej: ${esc(p.name)}">+</button>
+              </div>
+              <span class="line-price">${money(price(p) * it.qty)}</span>
+            </div>
+          <button class="line-del" data-act="del" data-id="${id}" aria-label="Usuń: ${esc(p.name)}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 6h12l-1 12H7zm4 2v8h2v-8zm4 0v8h2v-8z"/></svg>
+          </button>
+        </div>`; }).join("")}
 
       <label class="field"><span>Dzień dostawy</span></label>
       <div class="seg">${opts.map((d, i) => `<button data-day="${iso(d)}" aria-pressed="${iso(d) === cart.delivery}">${i === 0 ? "Jutro" : dayName(d)}<small>${d.getDate()}.${String(d.getMonth() + 1).padStart(2, "0")}</small></button>`).join("")}</div>
@@ -234,15 +243,16 @@
     const last = mem.last[id];
     const cur = cart.items[id];
     let val = cur ? String(cur.qty).replace(".", ",") : "";
-    const steps = (p.unit === "kg" ? [1, 5, 10, 25] : [1, 2, 5, 10]).slice(last ? 1 : 0);
+    const steps = p.unit === "kg" ? [1, 5, 10, 25] : [1, 2, 5, 10];
 
     $sheet.innerHTML = `<div class="sheet-inner">
       <div class="sheet-head">${pic(p, "sm")}<div><h3>${esc(p.name)}</h3><div class="muted">${money2(price(p))} / ${p.unit}</div></div>
         <button class="sheet-close" data-s="close" aria-label="Zamknij">×</button></div>
       <label class="display"><input class="num" id="snum" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="0" aria-label="Ilość"><span class="unit" id="sunit"></span></label>
-      <div class="chips">
-        ${last ? `<button class="chip chip-last" data-s="set" data-v="${last.qty}">Jak ostatnio: ${qtyText(last.qty, p.unit)}</button>` : ""}
-        ${steps.map(s => `<button class="chip" data-s="add" data-v="${s}">+${s}</button>`).join("")}
+      ${last ? `<div class="chips"><button class="chip chip-last" data-s="set" data-v="${last.qty}">Jak ostatnio: ${qtyText(last.qty, p.unit)}</button></div>` : ""}
+      <div class="steps">
+        ${[...steps].reverse().map(s => `<button class="step step-minus" data-s="add" data-v="-${s}" aria-label="Odejmij ${s}">−${s}</button>`).join("")}
+        ${steps.map(s => `<button class="step" data-s="add" data-v="${s}" aria-label="Dodaj ${s}">+${s}</button>`).join("")}
       </div>
       <div class="keypad">${["1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "0", "⌫"].map(k =>
         `<button class="key" data-s="key" data-v="${k}" ${k === "⌫" ? 'aria-label="Usuń cyfrę"' : ""}>${k}</button>`).join("")}</div>
@@ -286,7 +296,7 @@
         else if (val.length < 6) val = val === "0" ? v : val + v;
       }
       if (a === "add" || a === "set") fresh = false;
-      if (a === "add") val = String(+(parsed() + +v).toFixed(2)).replace(".", ",");
+      if (a === "add") { const n = +(parsed() + +v).toFixed(2); val = n > 0 ? String(n).replace(".", ",") : ""; }
       if (a === "set") val = String(v).replace(".", ",");
       if (a === "remove") { delete cart.items[id]; persistCart(); toast(`Usunięto: ${p.name}`); return close(true); }
       if (a === "ok") {
@@ -305,6 +315,10 @@
     $sheet.querySelector(".sheet-close").focus({ preventScroll: true }); // don't pop the keyboard on open
   }
 
+  document.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches?.(".line[data-prod]")) { e.preventDefault(); openSheet(e.target.dataset.prod); }
+  });
+
   // ---------- global clicks ----------
   document.addEventListener("click", e => {
     const t = e.target.closest("[data-prod],[data-cat],[data-act],[data-day]");
@@ -316,6 +330,17 @@
     if (act === "repeat") {
       const o = orders.find(x => x.id === t.dataset.id);
       if (o) { loadOrderIntoCart(o); toast("Wczytano poprzednie zamówienie"); location.hash = "#/koszyk"; }
+    }
+    if (act === "inc" || act === "dec") {
+      const it = cart.items[t.dataset.id]; if (!it) return;
+      const n = +(it.qty + (act === "inc" ? 1 : -1)).toFixed(2);
+      if (n > 0) { it.qty = n; persistCart(); renderCart(); }
+      return;
+    }
+    if (act === "del") {
+      const p = byId[t.dataset.id];
+      if (confirm(`Usunąć z zamówienia: ${p.name}?`)) { delete cart.items[t.dataset.id]; persistCart(); toast(`Usunięto: ${p.name}`); renderCart(); }
+      return;
     }
     if (act === "clear" && confirm("Wyczyścić cały koszyk?")) { cart.items = {}; persistCart(); renderCart(); }
     if (act === "submit") submit();
