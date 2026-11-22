@@ -19,11 +19,11 @@ window.PRODUCTS = [
   { id: "burak-ob", cat: "obrane", name: "Buraki obrane", emoji: "🟣", img: "img/buraki-obrane.webp", unit: "kg", price: 4.5, peeled: true },
 
   // Warzywa
-  { id: "ziemniak", cat: "warzywa", name: "Ziemniaki", emoji: "🥔", unit: "kg", price: 1.6 },
-  { id: "marchew", cat: "warzywa", name: "Marchew", emoji: "🥕", unit: "kg", price: 2.1 },
-  { id: "cebula", cat: "warzywa", name: "Cebula", emoji: "🧅", unit: "kg", price: 2.3 },
-  { id: "pomidor", cat: "warzywa", name: "Pomidor", emoji: "🍅", unit: "kg", price: 8.5 },
-  { id: "papryka-cz", cat: "warzywa", name: "Papryka czerwona", emoji: "🫑", unit: "kg", price: 11.0 },
+  { id: "ziemniak", cat: "warzywa", name: "Ziemniaki", emoji: "🥔", img: "img/ziemniaki.webp", unit: "kg", price: 1.6 },
+  { id: "marchew", cat: "warzywa", name: "Marchew", emoji: "🥕", img: "img/marchew.webp", unit: "kg", price: 2.1 },
+  { id: "cebula", cat: "warzywa", name: "Cebula", emoji: "🧅", img: "img/cebula.webp", unit: "kg", price: 2.3 },
+  { id: "pomidor", cat: "warzywa", name: "Pomidor", emoji: "🍅", img: "img/pomidor.webp", unit: "kg", price: 8.5 },
+  { id: "papryka-cz", cat: "warzywa", name: "Papryka czerwona", emoji: "🫑", img: "img/papryka-czerwona.webp", unit: "kg", price: 11.0 },
   { id: "ogorek", cat: "warzywa", name: "Ogórek", emoji: "🥒", unit: "karton", price: 42.0 },
   { id: "cukinia", cat: "warzywa", name: "Cukinia", emoji: "🥒", unit: "kg", price: 7.5 },
   { id: "kapusta", cat: "warzywa", name: "Kapusta biała", emoji: "🥬", unit: "kg", price: 2.4 },
