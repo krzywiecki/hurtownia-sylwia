@@ -25,10 +25,10 @@ window.PRODUCTS = [
   { id: "pomidor", cat: "warzywa", name: "Pomidor", emoji: "🍅", img: "img/pomidor.webp", unit: "kg", price: 8.5 },
   { id: "papryka-cz", cat: "warzywa", name: "Papryka czerwona", emoji: "🫑", img: "img/papryka-czerwona.webp", unit: "kg", price: 11.0 },
   { id: "ogorek", cat: "warzywa", name: "Ogórek", emoji: "🥒", unit: "karton", price: 42.0 },
-  { id: "cukinia", cat: "warzywa", name: "Cukinia", emoji: "🥒", unit: "kg", price: 7.5 },
-  { id: "kapusta", cat: "warzywa", name: "Kapusta biała", emoji: "🥬", unit: "kg", price: 2.4 },
+  { id: "cukinia", cat: "warzywa", name: "Cukinia", emoji: "🥒", img: "img/cukinia.webp", unit: "kg", price: 7.5 },
+  { id: "kapusta", cat: "warzywa", name: "Kapusta biała", emoji: "🥬", img: "img/kapusta-biala.webp", unit: "kg", price: 2.4 },
   { id: "czosnek", cat: "warzywa", name: "Czosnek", emoji: "🧄", unit: "kg", price: 19.0 },
-  { id: "brokul", cat: "warzywa", name: "Brokuł", emoji: "🥦", unit: "szt", price: 5.5 },
+  { id: "brokul", cat: "warzywa", name: "Brokuł", emoji: "🥦", img: "img/brokul.webp", unit: "szt", price: 5.5 },
 
   // Owoce
   { id: "mandarynki", cat: "owoce", name: "Mandarynki", emoji: "🍊", img: "../img/mandarynki.webp", unit: "kg", price: 6.9 },
