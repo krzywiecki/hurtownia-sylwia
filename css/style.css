@@ -359,3 +359,14 @@ p { margin: 0 0 1em; }
   flex: none; width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--green);
   display: grid; place-items: center; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.1; color: var(--green-dark);
 }
+
+/* Product list (asortyment) */
+.pl-cat { font-size: 24px; margin: 36px 0 14px; }
+.pl-cat:first-of-type { margin-top: 0; }
+.pl-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.pl-item { position: relative; margin: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 0 var(--line); }
+.pl-item img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.pl-item figcaption { padding: 8px 10px 10px; font-weight: 600; font-size: 16px; line-height: 1.2; }
+.pl-badge { position: absolute; top: 8px; left: 8px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+@media (max-width: 960px) { .pl-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 640px) { .pl-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }

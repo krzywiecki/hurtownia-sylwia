@@ -296,6 +296,37 @@ PEELED = f'''
   </section>'''
 
 
+def app_products():
+    """Reads categories/products from zamow/products.js (single source of truth)."""
+    import re
+    js = (OUT / "zamow" / "products.js").read_text(encoding="utf-8")
+    cats = re.findall(r'\{ id: "(\w+)", name: "([^"]+)", icon:', js)
+    prods = []
+    for line in js.splitlines():
+        m = re.search(r'cat: "(\w+)", name: "([^"]+)".*?img: "([^"]+)"', line)
+        if m:
+            img = m.group(3)
+            img = img[3:] if img.startswith("../") else "zamow/" + img
+            prods.append((m.group(1), m.group(2), img, "peeled: true" in line))
+    return cats, prods
+
+
+def product_list():
+    cats, prods = app_products()
+    out = []
+    for cid, cname in cats:
+        items = [p for p in prods if p[0] == cid]
+        if not items:
+            continue
+        tiles = "".join(f'''
+          <figure class="pl-item"><img src="{img}" alt="{name}" loading="lazy">{'<span class="pl-badge">obrane</span>' if peeled else ""}<figcaption>{name}</figcaption></figure>''' for _, name, img, peeled in items)
+        out.append(f'''
+      <h3 class="pl-cat">{"Warzywa obierane" if cid == "obrane" else cname}</h3>
+      <div class="pl-grid">{tiles}
+      </div>''')
+    return "".join(out)
+
+
 def features():
     items = [
         (LEAF_SVG, "Świeży towar", "Dostawy na bieżąco – to, co trafia na półkę, jest jędrne, pachnące i gotowe do sprzedaży."),
@@ -401,6 +432,16 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
     </div>
   </section>
 {PEELED}
+
+  <section class="section section-tint" id="produkty">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="hand">Lista produktów</p>
+        <h2>Co możesz u nas zamówić</h2>
+        <p>Najczęściej zamawiane produkty. Ceny ustalamy indywidualnie dla każdej firmy – zadzwoń po swój cennik.</p>
+      </div>{product_list()}
+    </div>
+  </section>
 {SEASON}
 
   <section class="section">
