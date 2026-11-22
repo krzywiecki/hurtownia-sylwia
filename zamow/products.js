@@ -13,7 +13,7 @@ window.PRODUCTS = [
   // Warzywa obierane
   { id: "ziemniak-ob", cat: "obrane", name: "Ziemniaki obrane", emoji: "🥔", img: "img/ziemniaki-obrane.webp", unit: "kg", price: 3.2, peeled: true },
   { id: "marchew-ob", cat: "obrane", name: "Marchew obrana", emoji: "🥕", unit: "kg", price: 3.9, peeled: true },
-  { id: "seler-ob", cat: "obrane", name: "Seler obrany", emoji: "🥔", unit: "kg", price: 5.5, peeled: true },
+  { id: "seler-ob", cat: "obrane", name: "Seler obrany", emoji: "🥔", img: "img/seler-obrany.webp", unit: "kg", price: 5.5, peeled: true },
   { id: "pietruszka-ob", cat: "obrane", name: "Pietruszka obrana", emoji: "🥕", unit: "kg", price: 8.9, peeled: true },
   { id: "cebula-ob", cat: "obrane", name: "Cebula obrana", emoji: "🧅", unit: "kg", price: 4.2, peeled: true },
   { id: "burak-ob", cat: "obrane", name: "Buraki obrane", emoji: "🟣", unit: "kg", price: 4.5, peeled: true },
