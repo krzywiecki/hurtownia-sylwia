@@ -37,7 +37,7 @@ window.PRODUCTS = [
   { id: "cytryna", cat: "owoce", name: "Cytryny", emoji: "🍋", img: "img/cytryny.webp", unit: "kg", price: 8.0 },
   { id: "jablka", cat: "owoce", name: "Jabłka", emoji: "🍎", img: "img/jablka.webp", unit: "kg", price: 3.5 },
   { id: "pomarancze", cat: "owoce", name: "Pomarańcze", emoji: "🍊", img: "img/pomarancze.webp", unit: "kg", price: 6.2 },
-  { id: "winogrona", cat: "owoce", name: "Winogrona", emoji: "🍇", unit: "kg", price: 14.0 },
+  { id: "winogrona", cat: "owoce", name: "Winogrona", emoji: "🍇", img: "img/winogrona.webp", unit: "kg", price: 14.0 },
   { id: "miechunka", cat: "owoce", name: "Miechunka", emoji: "🟠", img: "../img/miechunka.webp", unit: "szt", price: 9.0 },
 
   // Sałaty i zioła
