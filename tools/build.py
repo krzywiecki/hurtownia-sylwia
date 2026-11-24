@@ -45,7 +45,7 @@ def social(cls="social"):
       </div>'''
 
 
-def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
+def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     nav = "\n      ".join(
         f'<a href="{href}"{CUR if href == file else ""}>{label}</a>'
         for href, label in NAV)
@@ -404,7 +404,7 @@ home = f'''
         </p>
       </div>
       <div class="hero-photo">
-        <img src="img/hero-kosz.webp" alt="Kosz pełen świeżych warzyw i owoców: brokuły, pomidory, granat, pomarańcza, marchew" width="500" height="675">
+        <img src="img/hero-warzywa.webp" srcset="img/hero-warzywa-600.webp 600w, img/hero-warzywa.webp 1000w" sizes="(max-width: 820px) 420px, 500px" alt="Świeże warzywa i owoce: melon, jabłka, truskawki, rzodkiewki, groszek, borówki, papryka, brokuły" width="1000" height="1250" fetchpriority="high">
         <img class="hero-badge" src="img/favicon.svg" alt="" aria-hidden="true">
       </div>
     </div>
