@@ -193,7 +193,7 @@
       <label class="field"><span>Uwagi do zamówienia</span><textarea id="dnote" rows="2" placeholder="np. wejście od zaplecza">${esc(cart.note)}</textarea></label>
       <label class="field"><span>Nazwa lokalu / firmy</span><input id="dcomp" autocomplete="organization" placeholder="np. Berlin Doner Kebap, Galeria Piastów" value="${esc(profile.company)}"></label>
 
-      <div class="price-note"><b>Ceny ustalamy indywidualnie</b> – każdy klient ma swój cennik. Wyceny nie ma w aplikacji: kwotę potwierdzimy telefonicznie lub na fakturze (wg wagi).</div>
+      <div class="price-note"><b>Ceny ustalamy indywidualnie</b> – każdy klient ma swój cennik.</div>
       <button class="btn btn-red" data-act="submit" style="margin-top:12px">Wyślij zamówienie ✓</button>
       <button class="btn btn-light" data-act="clear" style="margin-top:10px">Wyczyść koszyk</button>`;
 
