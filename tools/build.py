@@ -477,7 +477,7 @@ page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
 # ---------------- ASORTYMENT ----------------
 asort = page_head("Co u nas znajdziesz", "Asortyment",
                   "Klasyka z polskich pól i trochę egzotyki. Asortyment zmienia się z porami roku – jeśli czegoś szukasz, po prostu zapytaj.",
-                  img="stock-owoce.webp") + f'''
+                  img="page-asortyment.webp") + f'''
 
   <section class="section">
     <div class="wrap">
@@ -527,7 +527,7 @@ steps = [
 ]
 dostawa = page_head("Dowozimy własnymi samochodami", "Dostawa w całej Polsce",
                     "Nie musisz przyjeżdżać do hurtowni – przywieziemy świeży towar pod drzwi Twojego sklepu, restauracji czy firmy.",
-                    img="stock-warzywa.webp") + f'''
+                    img="page-dostawa.webp") + f'''
 
   <section class="section">
     <div class="wrap split">
@@ -583,7 +583,7 @@ who = [
 ]
 firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><span>Współpracuj z nami!</span>",
                   "Zaopatrujemy restauracje, sklepy, kawiarnie i catering w całej Polsce. Świeży towar, warzywa obierane, certyfikaty ISO 22000 i HACCP, uczciwe ceny.",
-                  img="warzywa-stragan.webp") + certs("Dla restauracji, sklepów, stołówek i dużych placówek to podstawa współpracy. Nasze certyfikaty potwierdzają, że towar jest przechowywany, przygotowywany i dowożony zgodnie z normami bezpieczeństwa żywności.") + '''
+                  img="page-firmy.webp") + certs("Dla restauracji, sklepów, stołówek i dużych placówek to podstawa współpracy. Nasze certyfikaty potwierdzają, że towar jest przechowywany, przygotowywany i dowożony zgodnie z normami bezpieczeństwa żywności.") + '''
 
   <section class="section section-tint">
     <div class="wrap">
@@ -624,12 +624,12 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
 {b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False)}'''
 page("dla-firm.html", "Oferta dla firm",
      "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w całej Polsce. ISO 22000 i HACCP.",
-     firmy, og_image="img/warzywa-stragan.webp")
+     firmy, og_image="img/page-firmy.webp")
 
 # ---------------- O NAS ----------------
 onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</span>",
                  "Rodzinna firma z Legnicy, która od 33 lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w całej Polsce.",
-                 img="stock-mix.webp") + f'''
+                 img="page-o-nas.webp") + f'''
 
   <section class="section">
     <div class="wrap about">
