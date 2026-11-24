@@ -634,7 +634,7 @@ onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</s
   <section class="section">
     <div class="wrap about">
       <div class="about-photo">
-        <img src="img/mieta.webp" alt="Świeża mięta trzymana w dłoni" loading="lazy" width="803" height="802">
+        <img src="img/hero-kosz.webp" alt="Kosz pełen świeżych warzyw i owoców" loading="lazy" width="500" height="675">
       </div>
       <div class="about-text">
         <p class="hand">Kim jesteśmy</p>
