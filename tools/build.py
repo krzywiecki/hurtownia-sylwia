@@ -195,11 +195,11 @@ def b2b_band(title="Prowadzisz restaurację? Współpracuj z nami!",
 
 
 CARDS = [
-    ("warzywa-korzeniowe.webp", "Warzywa korzeniowe: ziemniaki, marchew, cebula, czosnek, topinambur, batat", 1080, 482,
+    ("kat-warzywa.webp", "Świeże warzywa: papryka, marchew, por, pomidorki, cebula, czosnek, ogórek", 800, 600,
      "Warzywa", "Ziemniaki, marchew, cebula, czosnek, buraki, kapusty, warzywa korzeniowe i sezonowe nowalijki."),
-    ("miechunka.webp", "Miechunka (physalis) w opakowaniu", 803, 803,
+    ("kat-owoce.webp", "Owoce: ananas, papaja, winogrona, cytryny, pomarańcze, kiwi, awokado, grejpfrut", 800, 600,
      "Owoce", "Jabłka, cytrusy, owoce sezonowe i egzotyczne – od bananów po granaty i miechunkę."),
-    ("bazylia.webp", "Świeża bazylia", 803, 501,
+    ("kat-ziola.webp", "Świeże zioła: koper, natka pietruszki, szczypiorek, bazylia, rozmaryn", 800, 600,
      "Świeże zioła", "Bazylia, mięta, tymianek, rozmaryn – cięte w pęczkach i w doniczkach."),
     ("jarmuz.webp", "Pęczek jarmużu", 802, 803,
      "Sałaty i liście", "Jarmuż, sałaty, szpinak, rukola i inne zielone liście dla kuchni restauracyjnych, barów sałatkowych i cateringu."),
