@@ -375,46 +375,7 @@
   // ---------- PWA ----------
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 
-  // Install prompt on phones/tablets: shown on every visit in the browser until the app is installed
-  // ("Później" hides it for the current session only).
-  const ua = navigator.userAgent;
-  const isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  const isMobile = isIOS || /Android|Mobi/i.test(ua);
-  const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  let deferredInstall = null;
-  const $install = document.getElementById("install");
-  const SHARE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l4 4-1.4 1.4L13 5.8V15h-2V5.8L9.4 7.4 8 6zM5 10h3v2H6v8h12v-8h-2v-2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1z"/></svg>';
-
-  function showInstall() {
-    if (!isMobile || standalone() || sessionStorage.getItem("sylwia.install.later")) return;
-    const steps = isIOS
-      ? `<ol class="install-steps"><li>Dotknij <b>Udostępnij</b> <span class="ico">${SHARE_SVG}</span> na dole ekranu</li><li>Wybierz <b>„Do ekranu początkowego”</b></li><li>Dotknij <b>Dodaj</b></li></ol>`
-      : deferredInstall ? ""
-      : `<ol class="install-steps"><li>Otwórz menu przeglądarki <b>⋮</b></li><li>Wybierz <b>„Zainstaluj aplikację”</b> lub <b>„Dodaj do ekranu głównego”</b></li></ol>`;
-    $install.innerHTML = `<div class="install-box" role="dialog" aria-modal="true" aria-labelledby="install-h">
-      <img src="icons/icon-192.png" alt="" width="72" height="72">
-      <h2 id="install-h">Zainstaluj aplikację</h2>
-      <p>Dodaj Hurtownię Sylwia do ekranu telefonu – zamówisz jednym dotknięciem, jak z każdej innej aplikacji.</p>
-      ${steps}
-      ${!isIOS && deferredInstall ? `<button class="btn btn-red" data-i="go">Zainstaluj</button>` : ""}
-      <button class="btn btn-light" data-i="later">Później</button></div>`;
-    $install.hidden = false;
-  }
-  $install.addEventListener("click", async e => {
-    const b = e.target.closest("[data-i]"); if (!b) return;
-    if (b.dataset.i === "go" && deferredInstall) {
-      deferredInstall.prompt();
-      const { outcome } = await deferredInstall.userChoice;
-      deferredInstall = null;
-      if (outcome === "accepted") { $install.hidden = true; return; }
-      return showInstall();
-    }
-    if (b.dataset.i === "later") { try { sessionStorage.setItem("sylwia.install.later", "1"); } catch {} $install.hidden = true; }
-  });
-  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredInstall = e; showInstall(); });
-  window.addEventListener("appinstalled", () => { $install.hidden = true; });
-  // Give Chrome a moment to fire beforeinstallprompt; otherwise fall back to manual steps.
-  setTimeout(() => { if ($install.hidden) showInstall(); }, isIOS ? 600 : 2500);
+  // Install: no custom UI – Chrome on Android shows its own install bar (we don't intercept beforeinstallprompt).
 
   route();
 })();
