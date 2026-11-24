@@ -223,6 +223,7 @@ def cards(items):
     return '<div class="cards">\n' + "\n".join(out) + "\n      </div>"
 
 
+# Seasonal promo section – currently hidden. To show again, put {SEASON} back in index/asortyment bodies.
 SEASON = '''
   <section class="section section-tint" id="sezon">
     <div class="wrap">
@@ -423,7 +424,6 @@ home = f'''
       <p class="center-cta"><a href="asortyment.html" class="btn btn-ghost">Cały asortyment</a></p>
     </div>
   </section>
-{SEASON}
 
   <section class="section">
     <div class="wrap split">
@@ -482,7 +482,6 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
       </div>{product_list()}
     </div>
   </section>
-{SEASON}
 
   <section class="section">
     <div class="wrap">
