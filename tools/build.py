@@ -5,7 +5,7 @@ import sys, pathlib, json
 
 OUT = pathlib.Path(sys.argv[1])
 
-SITE = "https://www.warzywaiowoce.legnica.pl"
+SITE = "https://hurtowniasylwia.pl"
 FB_URL = "https://www.facebook.com/p/Sylwia-Hurtownia-warzyw-i-owoc%C3%B3w-100070774976242/"
 # Stock photos (img/stock-*.webp) are licensed Adobe Stock previews –
 # replace with the full-resolution files under the same names.

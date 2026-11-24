@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.warzywaiowoce.legnica.pl/sitemap.xml
+Sitemap: https://hurtowniasylwia.pl/sitemap.xml
