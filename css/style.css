@@ -349,17 +349,6 @@ p { margin: 0 0 1em; }
   * { transition: none !important; }
 }
 
-/* Certificates */
-.certs { padding: 36px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.certs-inner { display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; }
-.cert { display: flex; align-items: center; gap: 16px; }
-.cert p { margin: 0; color: var(--muted); font-size: 16px; max-width: 260px; }
-.cert strong { display: block; font-size: 19px; color: var(--ink); }
-.cert-badge {
-  flex: none; width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--green);
-  display: grid; place-items: center; text-align: center; font-weight: 700; font-size: 14px; line-height: 1.1; color: var(--green-dark);
-}
-
 /* Product list (asortyment) */
 .pl-cat { font-size: 24px; margin: 36px 0 14px; }
 .pl-cat:first-of-type { margin-top: 0; }
@@ -370,3 +359,40 @@ p { margin: 0 0 1em; }
 .pl-badge { position: absolute; top: 8px; left: 8px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
 @media (max-width: 960px) { .pl-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 640px) { .pl-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+/* Certificates – prominent section */
+.certs { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 1000px; margin: 0 auto; }
+.cert-card {
+  display: flex; align-items: center; gap: 28px; padding: 28px; background: #fff;
+  border: 2px solid var(--green); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.cert-card h3 { font-size: 30px; margin: 4px 0 8px; }
+.cert-card p { margin: 0; color: var(--muted); }
+.cert-check { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .05em; color: var(--green-dark) !important; }
+.cert-check svg { width: 18px; height: 18px; fill: var(--green); }
+.cert-seal {
+  flex: none; width: 130px; height: 130px; border-radius: 50%; display: grid; place-content: center; text-align: center;
+  background: radial-gradient(circle, #fff 58%, var(--green) 59%, var(--green) 64%, #fff 65%, #fff 70%, var(--green-dark) 71%);
+  color: var(--green-dark); font-weight: 800; font-size: 24px; line-height: 1.05;
+}
+.cert-seal small { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
+.cert-photo { flex: none; width: 160px; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.18); transition: transform .2s; }
+.cert-photo:hover { transform: scale(1.03); }
+.cert-photo img { display: block; width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
+@media (max-width: 860px) { .cert-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) {
+  .cert-card { flex-direction: column; text-align: center; padding: 22px; }
+  .cert-check { justify-content: center; }
+}
+
+/* Certificate strip in hero */
+.cert-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+.cert-mini {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+  background: #fff; border: 2px solid var(--green); color: var(--green-dark); font-weight: 700; text-decoration: none;
+}
+.cert-mini svg { width: 20px; height: 20px; fill: var(--green); }
+.cert-mini:hover { background: var(--green); color: #fff; }
+.cert-mini:hover svg { fill: #fff; }
+.certs .section-head { max-width: 760px; }

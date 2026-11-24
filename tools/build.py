@@ -265,11 +265,51 @@ SEASON = '''
   </section>'''
 
 
-CERTS = '''
-  <section class="certs">
-    <div class="wrap certs-inner">
-      <div class="cert"><span class="cert-badge">ISO<br>22000</span><p><strong>ISO 22000</strong>System zarządzania bezpieczeństwem żywności</p></div>
-      <div class="cert"><span class="cert-badge">HACCP</span><p><strong>HACCP</strong>Kontrola jakości i higieny na każdym etapie</p></div>
+SEAL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm-1.5 15.5-4-4 1.4-1.4 2.6 2.6 6.1-6.1 1.4 1.4z"/></svg>'
+
+# Certificate scans: drop img/cert-iso22000.webp / img/cert-haccp.webp (portrait, ~A4)
+# into img/ and rebuild – they replace the seal in the certificate cards automatically.
+CERT_LIST = [
+    ("iso22000", "ISO<br>22000", "ISO 22000",
+     "Międzynarodowy system zarządzania bezpieczeństwem żywności. Kontrolowany proces od przyjęcia towaru po dostawę do klienta."),
+    ("haccp", "HACCP", "HACCP",
+     "System analizy zagrożeń i krytycznych punktów kontroli. Higiena i jakość pilnowane na każdym etapie – także przy warzywach obieranych."),
+]
+
+
+def cert_strip():
+    return '\n        <div class="cert-strip">' + "".join(
+        f'\n          <a class="cert-mini" href="#certyfikaty">{SEAL_SVG}Certyfikat {n}</a>'
+        for _, _, n, _ in CERT_LIST) + '\n        </div>'
+
+
+def certs(lead="Pracujemy według uznanych standardów bezpieczeństwa żywności – to gwarancja dla Twojej kuchni, sklepu i Twoich klientów."):
+    cards = []
+    for key, badge, name, desc in CERT_LIST:
+        if (OUT / "img" / f"cert-{key}.webp").exists():
+            visual = (f'<a class="cert-photo" href="img/cert-{key}.webp" target="_blank" rel="noopener">'
+                      f'<img src="img/cert-{key}.webp" alt="Certyfikat {name} – Hurtownia Sylwia" loading="lazy"></a>')
+        else:
+            visual = f'<div class="cert-seal"><span>{badge}</span><small>certyfikat</small></div>'
+        cards.append(f'''
+        <article class="cert-card">
+          {visual}
+          <div>
+            <p class="cert-check">{SEAL_SVG}Certyfikowana jakość</p>
+            <h3>{name}</h3>
+            <p>{desc}</p>
+          </div>
+        </article>''')
+    return f'''
+  <section class="section certs" id="certyfikaty">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="hand">Bezpieczeństwo żywności</p>
+        <h2>Certyfikaty ISO 22000 i HACCP</h2>
+        <p>{lead}</p>
+      </div>
+      <div class="cert-grid">{"".join(cards)}
+      </div>
     </div>
   </section>'''
 
@@ -358,6 +398,7 @@ home = f'''
           <a href="{WA_URL}" class="btn btn-wa" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a>
           <a href="asortyment.html" class="btn btn-ghost">Zobacz asortyment</a>
         </div>
+{cert_strip()}
         <p class="hero-address">
           {PIN_SVG}
           Legnica, ul. Bydgoska 18
@@ -370,7 +411,7 @@ home = f'''
     </div>
   </section>
 {features()}
-{CERTS}
+{certs()}
 
   <section class="section">
     <div class="wrap">
@@ -535,9 +576,9 @@ who = [
 ]
 firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><span>Współpracuj z nami!</span>",
                   "Zaopatrujemy restauracje, sklepy, kawiarnie i catering w Południowej Polsce. Świeży towar, warzywa obierane, certyfikaty ISO 22000 i HACCP, uczciwe ceny.",
-                  img="warzywa-stragan.webp") + '''
+                  img="warzywa-stragan.webp") + certs("Dla restauracji, sklepów, stołówek i dużych placówek to podstawa współpracy. Nasze certyfikaty potwierdzają, że towar jest przechowywany, przygotowywany i dowożony zgodnie z normami bezpieczeństwa żywności.") + '''
 
-  <section class="section">
+  <section class="section section-tint">
     <div class="wrap">
       <div class="section-head">
         <p class="hand">Z kim współpracujemy</p>
@@ -553,7 +594,7 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
     </div>
   </section>
 
-  <section class="section section-tint">
+  <section class="section">
     <div class="wrap about">
       <div class="about-photo">
         <img src="img/stock-catering.webp" alt="Przygotowanie stołu cateringowego z wędlinami, serami i dodatkami" loading="lazy" width="963" height="294" style="aspect-ratio: 4/3">
@@ -573,7 +614,6 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
       </div>
     </div>
   </section>
-{CERTS}
 {b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False)}'''
 page("dla-firm.html", "Oferta dla firm",
      "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w Południowej Polsce. ISO 22000 i HACCP.",
@@ -605,7 +645,7 @@ onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</s
       </div>
     </div>
   </section>
-{CERTS}
+{certs()}
 
   <section class="section section-tint">
     <div class="wrap split">
