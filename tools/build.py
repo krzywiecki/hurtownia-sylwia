@@ -78,7 +78,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
     "telephone": "+48 782 272 727",
     "url": "https://www.warzywaiowoce.legnica.pl",
     "sameAs": ["{FB_URL}"],
-    "areaServed": {json.dumps(CITIES, ensure_ascii=False)},
+    "areaServed": {{"@type": "Country", "name": "Polska"}},
     "address": {{
       "@type": "PostalAddress",
       "streetAddress": "ul. Bydgoska 18",
@@ -178,7 +178,7 @@ def cities_list():
 
 
 def b2b_band(title="Prowadzisz restaurację? Współpracuj z nami!",
-             text="Sklep, restauracja, kawiarnia czy catering – przygotujemy stałe zamówienie pod Twoją kuchnię i dowieziemy je za darmo.",
+             text="Sklep, restauracja, kawiarnia czy catering – przygotujemy stałe zamówienie pod Twoją kuchnię i dowieziemy je pod drzwi.",
              link=True):
     more = '<a href="dla-firm.html" class="btn btn-outline-white">Oferta dla firm</a>' if link else ""
     return f'''
@@ -374,7 +374,7 @@ def product_list():
 def features():
     items = [
         (LEAF_SVG, "Świeży towar", "Dostawy na bieżąco – to, co trafia na półkę, jest jędrne, pachnące i gotowe do sprzedaży."),
-        (TRUCK_SVG, "Darmowa dostawa", "Dowozimy za darmo do Legnicy i 9 okolicznych miast, a dostawy realizujemy w całej Południowej Polsce."),
+        (TRUCK_SVG, "Dostawa w całej Polsce", "Dowozimy własnymi samochodami – codziennie po Legnicy i okolicy, a dostawy realizujemy na terenie całej Polski."),
         (PEOPLE_SVG, "Rodzinna firma od 33 lat", "Znamy naszych klientów po imieniu. Doradzimy, zarezerwujemy towar i pomożemy skompletować zamówienie."),
     ]
     return '''
@@ -437,8 +437,8 @@ home = f'''
       </div>
       <div>
         <p class="hand">Gdzie dostarczamy</p>
-        <h2>Za darmo!</h2>
-        <p class="muted">Własnymi samochodami dowozimy towar bezpłatnie do Legnicy i okolicznych miast:</p>
+        <h2>Cała Polska</h2>
+        <p class="muted">Własnymi samochodami dowozimy towar na terenie całej Polski. Codziennie jeździmy m.in. do:</p>
         <ul class="cities">
 {cities_list()}
         </ul>
@@ -453,7 +453,7 @@ home = f'''
       <div>
         <p class="hand">Zapraszamy</p>
         <h2>Hurtownia przy Bydgoskiej</h2>
-        <p class="muted">Legnica, ul. Bydgoska 18. Odbierz zamówienie w hurtowni albo zadzwoń i zamów z darmową dostawą.</p>
+        <p class="muted">Legnica, ul. Bydgoska 18. Odbierz zamówienie w hurtowni albo zadzwoń i zamów z dostawą.</p>
         <div class="contact-cta">
           <a href="kontakt.html" class="btn btn-red">Kontakt i dojazd</a>
           <a href="{FB_URL}" class="btn btn-ghost" target="_blank" rel="noopener">{FB_SVG} Facebook</a>
@@ -463,7 +463,7 @@ home = f'''
   </section>'''
 
 page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
-     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, warzywa obierane, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Darmowa dostawa. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
+     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, warzywa obierane, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Dostawa w całej Polsce. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
      home)
 
 # ---------------- ASORTYMENT ----------------
@@ -521,21 +521,22 @@ page("asortyment.html", "Asortyment",
 steps = [
     ("1", "Zadzwoń", "Powiedz, czego potrzebujesz. Doradzimy, co jest teraz najlepsze w sezonie."),
     ("2", "Kompletujemy", "Osobiście wybieramy i pakujemy towar do skrzynek."),
-    ("3", "Dowozimy", "Przywozimy zamówienie własnym samochodem – za darmo."),
+    ("3", "Dowozimy", "Przywozimy zamówienie własnym samochodem – pod same drzwi."),
 ]
-dostawa = page_head("Dowozimy własnymi samochodami", "Darmowa dostawa",
+dostawa = page_head("Dowozimy własnymi samochodami", "Dostawa w całej Polsce",
                     "Nie musisz przyjeżdżać do hurtowni – przywieziemy świeży towar pod drzwi Twojego sklepu, restauracji czy firmy.",
                     img="stock-warzywa.webp") + f'''
 
   <section class="section">
     <div class="wrap split">
       <div>
-        <p class="hand">Gdzie dostarczamy za darmo?</p>
-        <h2>10 miast na Dolnym Śląsku</h2>
+        <p class="hand">Gdzie dostarczamy?</p>
+        <h2>Cała Polska</h2>
+        <p class="muted">Dostawy realizujemy na terenie całej Polski. Codzienne trasy obejmują m.in.:</p>
         <ul class="cities cities-lg">
 {cities_list()}
         </ul>
-        <p class="muted">Jesteś spoza listy? Dostawy realizujemy na terenie całej Południowej Polski – zadzwoń, ustalimy szczegóły.</p>
+        <p class="muted">Jesteś z innej części Polski? Zadzwoń – ustalimy trasę i dni dostaw.</p>
       </div>
       <div class="split-photo">
         <img src="img/flota.webp" alt="Dwa samochody dostawcze Hurtowni Sylwia z grafiką owoców i warzyw" loading="lazy" width="960" height="720">
@@ -560,15 +561,15 @@ dostawa = page_head("Dowozimy własnymi samochodami", "Darmowa dostawa",
     <div class="wrap">
       <div class="section-head">
         <p class="hand">Nie tylko okolice Legnicy</p>
-        <h2>Dostawy w całej Południowej Polsce</h2>
-        <p>Regularnie dowozimy towar do firm w Południowej Polsce. Zadzwoń – ustalimy trasę, dni dostaw i warunki.</p>
+        <h2>Dostawy w całej Polsce</h2>
+        <p>Regularnie dowozimy towar do firm w całej Polsce. Zadzwoń – ustalimy trasę, dni dostaw i warunki.</p>
         <!-- TODO: opis województw (do uzupełnienia przez właściciela) -->
       </div>
     </div>
   </section>
 {b2b_band()}'''
-page("dostawa.html", "Darmowa dostawa",
-     "Dostawy warzyw i owoców w całej Południowej Polsce. Darmowa dostawa: Legnica, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Prochowice, Chojnów, Bolesławiec, Jelenia Góra.",
+page("dostawa.html", "Dostawa",
+     "Dostawy warzyw i owoców w całej Polsce. Codzienne trasy: Legnica, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Prochowice, Chojnów, Bolesławiec, Jelenia Góra.",
      dostawa, og_image="img/flota.webp")
 
 # ---------------- DLA FIRM ----------------
@@ -579,7 +580,7 @@ who = [
     (CAL_SVG, "Firmy i instytucje", "Owoce do biura, paczki świąteczne i mikołajkowe dla pracowników, dzieci i klientów."),
 ]
 firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><span>Współpracuj z nami!</span>",
-                  "Zaopatrujemy restauracje, sklepy, kawiarnie i catering w Południowej Polsce. Świeży towar, warzywa obierane, certyfikaty ISO 22000 i HACCP, uczciwe ceny.",
+                  "Zaopatrujemy restauracje, sklepy, kawiarnie i catering w całej Polsce. Świeży towar, warzywa obierane, certyfikaty ISO 22000 i HACCP, uczciwe ceny.",
                   img="warzywa-stragan.webp") + certs("Dla restauracji, sklepów, stołówek i dużych placówek to podstawa współpracy. Nasze certyfikaty potwierdzają, że towar jest przechowywany, przygotowywany i dowożony zgodnie z normami bezpieczeństwa żywności.") + '''
 
   <section class="section section-tint">
@@ -608,7 +609,7 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
         <h2>Partner, a nie tylko dostawca</h2>
         <ul class="ticks">
           <li>Certyfikaty ISO 22000 i HACCP</li>
-          <li>Darmowa dostawa do 10 miast regionu, dostawy w całej Południowej Polsce</li>
+          <li>Dostawy w całej Polsce</li>
           <li>Warzywa obierane – gotowe do użycia w kuchni</li>
           <li>Stałe zamówienia i stałe pozycje – bez dzwonienia za każdym razem</li>
           <li>Osobiście wybierany, świeży towar</li>
@@ -620,12 +621,12 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
   </section>
 {b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False)}'''
 page("dla-firm.html", "Oferta dla firm",
-     "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w Południowej Polsce. ISO 22000 i HACCP.",
+     "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w całej Polsce. ISO 22000 i HACCP.",
      firmy, og_image="img/warzywa-stragan.webp")
 
 # ---------------- O NAS ----------------
 onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</span>",
-                 "Rodzinna firma z Legnicy, która od 33 lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w regionie.",
+                 "Rodzinna firma z Legnicy, która od 33 lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w całej Polsce.",
                  img="stock-mix.webp") + f'''
 
   <section class="section">
@@ -656,8 +657,8 @@ onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</s
       <div>
         <p class="hand">Nasza flota</p>
         <h2>Rozpoznasz nas na drodze</h2>
-        <p class="muted">Nasze samochody w kolorowych barwach owoców i warzyw codziennie rozwożą towar po Legnicy i okolicy – do Lubina, Głogowa, Polkowic, Jawora, Złotoryi, Prochowic, Chojnowa, Bolesławca i Jeleniej Góry – a także dalej, w całej Południowej Polsce.</p>
-        <a href="dostawa.html" class="btn btn-red">Darmowa dostawa</a>
+        <p class="muted">Nasze samochody w kolorowych barwach owoców i warzyw codziennie rozwożą towar po Legnicy i okolicy – do Lubina, Głogowa, Polkowic, Jawora, Złotoryi, Prochowic, Chojnowa, Bolesławca i Jeleniej Góry – a także dalej, w całej Polsce.</p>
+        <a href="dostawa.html" class="btn btn-red">Dostawa</a>
       </div>
       <div class="split-photo">
         <img src="img/flota.webp" alt="Dwa samochody dostawcze Hurtowni Sylwia z grafiką owoców i warzyw" loading="lazy" width="960" height="720">
@@ -713,7 +714,7 @@ kontakt = page_head("Zapraszamy", "Kontakt",
           </li>
           <li>
             <span class="ci-icon">{TRUCK_SVG}</span>
-            <div><strong>Darmowa dostawa</strong>{", ".join(CITIES)}<br>Dostawy w całej Południowej Polsce</div>
+            <div><strong>Dostawa w całej Polsce</strong>Codzienne trasy: {", ".join(CITIES)}</div>
           </li>
         </ul>
         <div class="contact-cta">
@@ -732,7 +733,7 @@ kontakt = page_head("Zapraszamy", "Kontakt",
     </div>
   </section>'''
 page("kontakt.html", "Kontakt",
-     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Dostawy w całej Południowej Polsce.",
+     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Dostawy w całej Polsce.",
      kontakt)
 
 print("ok")
