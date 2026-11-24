@@ -1,5 +1,5 @@
 // Offline cache for the ordering app. Bump VERSION when files change.
-const VERSION = "sylwia-zamow-v26";
+const VERSION = "sylwia-zamow-v27";
 const ASSETS = ["./", "index.html", "app.css", "app.js", "products.js", "manifest.webmanifest",
   "icons/icon-192.png", "../img/favicon.svg",
   "../fonts/jost-latin.woff2", "../fonts/jost-latin-ext.woff2"];
