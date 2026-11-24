@@ -141,7 +141,6 @@
           ${inCart ? `<span class="qty-badge">${qtyText(inCart.qty, p.unit)}</span>` : ""}
           <div class="tile-body">
             <div class="tile-name">${esc(p.name)}</div>
-            <div class="tile-price">jedn.: ${p.unit}</div>
             ${last && !inCart ? `<div class="tile-last">Ostatnio: ${qtyText(last.qty, p.unit)}</div>` : ""}
           </div></button>`;
       }).join("") : `<p class="empty" style="grid-column:1/-1">Nie znaleźliśmy „${esc(catState.q)}”.<br>Zadzwoń – sprawdzimy, czy mamy.</p>`;
