@@ -5,6 +5,7 @@ import sys, pathlib, json
 
 OUT = pathlib.Path(sys.argv[1])
 
+SITE = "https://www.warzywaiowoce.legnica.pl"
 FB_URL = "https://www.facebook.com/p/Sylwia-Hurtownia-warzyw-i-owoc%C3%B3w-100070774976242/"
 # Stock photos (img/stock-*.webp) are licensed Adobe Stock previews –
 # replace with the full-resolution files under the same names.
@@ -46,12 +47,15 @@ def social(cls="social"):
       </div>'''
 
 
+PAGES = []
 def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     nav = "\n      ".join(
         f'<a href="{href}"{CUR if href == file else ""}>{label}</a>'
         for href, label in NAV)
     foot_nav = "\n        ".join(f'<a href="{h}">{l}</a>' for h, l in NAV)
     full_title = title if file == "index.html" else f"{title} – Hurtownia Sylwia, Legnica"
+    url = SITE + "/" + ("" if file == "index.html" else file)
+    PAGES.append(file)
     html = f'''<!doctype html>
 <html lang="pl">
 <head>
@@ -59,10 +63,16 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{full_title}</title>
   <meta name="description" content="{desc}">
+  <link rel="canonical" href="{url}">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Hurtownia Sylwia">
+  <meta property="og:url" content="{url}">
   <meta property="og:title" content="{full_title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="{og_image}">
+  <meta property="og:image" content="{SITE}/{og_image}">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
@@ -71,7 +81,10 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     "@type": "GroceryStore",
     "name": "Hurtownia Sylwia – warzywa i owoce",
     "telephone": "+48 782 272 727",
-    "url": "https://www.warzywaiowoce.legnica.pl",
+    "@id": "{SITE}/#business",
+    "url": "{SITE}/",
+    "logo": "{SITE}/img/logo.svg",
+    "image": "{SITE}/img/hero-warzywa.webp",
     "sameAs": ["{FB_URL}"],
     "areaServed": {{"@type": "Country", "name": "Polska"}},
     "address": {{
@@ -472,7 +485,7 @@ home = f'''
   </section>'''
 
 page("index.html", "Hurtownia Sylwia – warzywa i owoce z Legnicy",
-     "Rodzinna hurtownia warzyw i owoców w Legnicy. Świeże warzywa, owoce, warzywa obierane, zioła i bakalie dla sklepów, restauracji, cateringu i firm. Dostawa w całej Polsce. Legnica, ul. Bydgoska 18, tel. 782 272 727.",
+     "Rodzinna hurtownia warzyw i owoców w Legnicy. Warzywa, owoce, warzywa obierane, zioła i bakalie dla sklepów, restauracji i cateringu. Dostawa w całej Polsce.",
      home)
 
 # ---------------- ASORTYMENT ----------------
@@ -572,7 +585,7 @@ dostawa = page_head("Dowozimy własnymi samochodami", "Dostawa w całej Polsce",
   </section>
 {b2b_band()}'''
 page("dostawa.html", "Dostawa",
-     "Dostawy warzyw i owoców w całej Polsce. Codzienne trasy: Legnica, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Prochowice, Chojnów, Bolesławiec, Jelenia Góra.",
+     "Dostawy warzyw i owoców w całej Polsce. Stałe trasy: Legnica, Wrocław, Lubin, Głogów, Polkowice, Jawor, Złotoryja, Bolesławiec, Jelenia Góra i okolice.",
      dostawa, og_image="img/flota.webp")
 
 # ---------------- DLA FIRM ----------------
@@ -802,4 +815,7 @@ page("polityka-prywatnosci.html", "Polityka prywatności",
      "Polityka prywatności i informacja o plikach cookie Hurtowni Sylwia z Legnicy.",
      polityka)
 
+(OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+urls = "\n".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc></url>" for f in PAGES)
+(OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
 print("ok")
