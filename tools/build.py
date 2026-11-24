@@ -86,10 +86,15 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     "logo": "{SITE}/img/logo.svg",
     "image": "{SITE}/img/hero-warzywa.webp",
     "sameAs": ["{FB_URL}"],
+    "openingHoursSpecification": [
+      {{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "03:00", "closes": "11:00"}},
+      {{"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "05:00", "closes": "11:00"}}
+    ],
     "areaServed": {{"@type": "Country", "name": "Polska"}},
     "address": {{
       "@type": "PostalAddress",
       "streetAddress": "ul. Bydgoska 18",
+      "postalCode": "59-220",
       "addressLocality": "Legnica",
       "addressCountry": "PL"
     }}
@@ -127,7 +132,8 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     </div>
     <div class="footer-info">
       <p class="footer-h">Kontakt</p>
-      <p>Legnica, ul. Bydgoska 18</p>
+      <p>ul. Bydgoska 18, 59-220 Legnica</p>
+      <p>Pn–Pt 3:00–11:00, Sob 5:00–11:00</p>
       <p><a href="tel:+48782272727">+48 782 272 727</a></p>
     </div>
     <nav class="footer-nav" aria-label="Stopka">
@@ -709,7 +715,11 @@ kontakt = page_head("Zapraszamy", "Kontakt",
         <ul class="contact-list">
           <li>
             <span class="ci-icon">{PIN_SVG}</span>
-            <div><strong>Adres</strong>ul. Bydgoska 18<br>Legnica</div>
+            <div><strong>Adres</strong>ul. Bydgoska 18<br>59-220 Legnica</div>
+          </li>
+          <li>
+            <span class="ci-icon">{CAL_SVG}</span>
+            <div><strong>Godziny otwarcia</strong>Pn–Pt: 3:00–11:00<br>Sobota: 5:00–11:00<br>Niedziela: nieczynne</div>
           </li>
           <li>
             <span class="ci-icon">{PHONE_SVG}</span>
