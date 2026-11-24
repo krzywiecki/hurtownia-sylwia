@@ -396,3 +396,5 @@ p { margin: 0 0 1em; }
 .cert-mini:hover { background: var(--green); color: #fff; }
 .cert-mini:hover svg { fill: #fff; }
 .certs .section-head { max-width: 760px; }
+.cert-link { display: inline-block; margin-top: 12px; font-weight: 700; color: var(--red); text-decoration: none; }
+.cert-link:hover { text-decoration: underline; }

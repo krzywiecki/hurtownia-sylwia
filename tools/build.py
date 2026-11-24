@@ -267,8 +267,8 @@ SEASON = '''
 
 SEAL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm-1.5 15.5-4-4 1.4-1.4 2.6 2.6 6.1-6.1 1.4 1.4z"/></svg>'
 
-# Certificate scans: drop img/cert-iso22000.webp / img/cert-haccp.webp (portrait, ~A4)
-# into img/ and rebuild – they replace the seal in the certificate cards automatically.
+# Certificates: PDFs in certyfikaty/certyfikat-<key>.pdf, thumbnails in img/cert-<key>.webp
+# (first page rendered from the PDF). Cards link to the PDF in a new tab.
 CERT_LIST = [
     ("iso22000", "ISO<br>22000", "ISO 22000",
      "Międzynarodowy system zarządzania bezpieczeństwem żywności. Kontrolowany proces od przyjęcia towaru po dostawę do klienta."),
@@ -279,18 +279,21 @@ CERT_LIST = [
 
 def cert_strip():
     return '\n        <div class="cert-strip">' + "".join(
-        f'\n          <a class="cert-mini" href="#certyfikaty">{SEAL_SVG}Certyfikat {n}</a>'
-        for _, _, n, _ in CERT_LIST) + '\n        </div>'
+        f'\n          <a class="cert-mini" href="certyfikaty/certyfikat-{k}.pdf" target="_blank" rel="noopener">{SEAL_SVG}Certyfikat {n}</a>'
+        for k, _, n, _ in CERT_LIST) + '\n        </div>'
 
 
 def certs(lead="Pracujemy według uznanych standardów bezpieczeństwa żywności – to gwarancja dla Twojej kuchni, sklepu i Twoich klientów."):
     cards = []
     for key, badge, name, desc in CERT_LIST:
         if (OUT / "img" / f"cert-{key}.webp").exists():
-            visual = (f'<a class="cert-photo" href="img/cert-{key}.webp" target="_blank" rel="noopener">'
-                      f'<img src="img/cert-{key}.webp" alt="Certyfikat {name} – Hurtownia Sylwia" loading="lazy"></a>')
+            visual = (f'<a class="cert-photo" href="certyfikaty/certyfikat-{key}.pdf" target="_blank" rel="noopener" title="Otwórz certyfikat {name} (PDF)">'
+                      f'<img src="img/cert-{key}.webp" alt="Certyfikat {name} – Hurtownia Sylwia" loading="lazy" width="480" height="679"></a>')
+            link = (f'<a class="cert-link" href="certyfikaty/certyfikat-{key}.pdf" target="_blank" rel="noopener">'
+                    f'Zobacz certyfikat (PDF) →</a>')
         else:
             visual = f'<div class="cert-seal"><span>{badge}</span><small>certyfikat</small></div>'
+            link = ""
         cards.append(f'''
         <article class="cert-card">
           {visual}
@@ -298,6 +301,7 @@ def certs(lead="Pracujemy według uznanych standardów bezpieczeństwa żywnośc
             <p class="cert-check">{SEAL_SVG}Certyfikowana jakość</p>
             <h3>{name}</h3>
             <p>{desc}</p>
+            {link}
           </div>
         </article>''')
     return f'''
