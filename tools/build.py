@@ -580,7 +580,7 @@ page("dla-firm.html", "Oferta dla firm",
      firmy, og_image="img/warzywa-stragan.webp")
 
 # ---------------- O NAS ----------------
-onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span>",
+onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</span>",
                  "Rodzinna firma z Legnicy, która od 33 lat dowozi świeże warzywa i owoce do sklepów, restauracji i firm w regionie.",
                  img="stock-mix.webp") + f'''
 
@@ -592,8 +592,8 @@ onas = page_head("O nas", "Mała hurtownia,<br><span>duże serce do warzyw</span
       <div class="about-text">
         <p class="hand">Kim jesteśmy</p>
         <h2>Rodzinnie, po sąsiedzku</h2>
-        <p>Hurtownia Sylwia to rodzinna firma z Legnicy, działająca od 33 lat. Nie jesteśmy wielką siecią – i dobrze nam z tym. Dzięki temu każdą skrzynkę oglądamy osobiście, a z klientami rozmawiamy jak z sąsiadami.</p>
-        <p>Zaopatrujemy lokalne sklepy, restauracje, stołówki, catering i firmy – w ilościach hurtowych i w hurtowych cenach.</p>
+        <p>Hurtownia Sylwia to rodzinna firma z Legnicy, działająca od 33 lat. Nie jesteśmy anonimową siecią – każdą skrzynkę oglądamy osobiście, a z klientami rozmawiamy jak z sąsiadami.</p>
+        <p>Zaopatrujemy zarówno małe lokale, jak i duże placówki: sklepy, restauracje, stołówki, catering i firmy – w ilościach hurtowych i w hurtowych cenach.</p>
         <!-- TODO: historia firmy (do uzupełnienia przez właściciela) -->
         <ul class="ticks">
           <li>33 lata doświadczenia</li>
