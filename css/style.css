@@ -212,7 +212,6 @@ p { margin: 0 0 1em; }
 .social-light a { background: rgba(255,255,255,.18); border-color: transparent; }
 .social-light a:hover { background: rgba(255,255,255,.3); }
 .social-light svg { fill: #fff; }
-.social [data-soon] { opacity: .55; cursor: default; }
 .follow { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 48px; text-align: center; }
 .follow p { margin: 0; color: var(--muted); }
 .follow-left { align-items: flex-start; text-align: left; margin-top: 36px; }

@@ -8,7 +8,6 @@ OUT = pathlib.Path(sys.argv[1])
 FB_URL = "https://www.facebook.com/p/Sylwia-Hurtownia-warzyw-i-owoc%C3%B3w-100070774976242/"
 # Stock photos (img/stock-*.webp) are licensed Adobe Stock previews –
 # replace with the full-resolution files under the same names.
-IG_URL = "#"  # TODO: wstaw adres profilu na Instagramie, gdy powstanie
 
 PHONE_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>'
 PIN_SVG = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -20,7 +19,6 @@ STORE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18l1 5a3 
 BOX_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.5 12 3 3 7.5v9L12 21l9-4.5zM12 5.2l5.6 2.8L12 10.8 6.4 8zM5 9.6l6 3v6l-6-3zm8 9v-6l6-3v6z"/></svg>'
 CAL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14zM7 11h5v5H7z"/></svg>'
 FB_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.4a22 22 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.3H7.4V14h2.7v8z"/></svg>'
-IG_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2zm6.1-8.1a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21.9 8.1c-.1-1.6-.4-3-1.6-4.2S17.6 2.2 16 2.1C14.3 2 9.7 2 8 2.1c-1.6.1-3 .4-4.2 1.6S2.2 6.4 2.1 8c-.1 1.7-.1 6.3 0 8 .1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.7.1 6.3.1 8 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.7.1-6.3 0-7.9zm-2.1 9.7a3.2 3.2 0 0 1-1.8 1.8c-1.3.5-4.3.4-5.7.4s-4.4.1-5.7-.4a3.2 3.2 0 0 1-1.8-1.8c-.5-1.3-.4-4.3-.4-5.7s-.1-4.4.4-5.7A3.2 3.2 0 0 1 6.3 4.6c1.3-.5 4.3-.4 5.7-.4s4.4-.1 5.7.4a3.2 3.2 0 0 1 1.8 1.8c.5 1.3.4 4.3.4 5.7s.1 4.4-.4 5.7z"/></svg>'
 
 CUR = ' aria-current="page"'
 WA_URL = "https://wa.me/48782272727"
@@ -41,12 +39,8 @@ NAV = [
 
 
 def social(cls="social"):
-    ig_attrs = 'href="%s"' % IG_URL
-    if IG_URL == "#":
-        ig_attrs += ' title="Instagram – już wkrótce" aria-disabled="true" data-soon'
     return f'''<div class="{cls}">
         <a href="{FB_URL}" target="_blank" rel="noopener" aria-label="Facebook – Hurtownia Sylwia">{FB_SVG}</a>
-        <a {ig_attrs} target="_blank" rel="noopener" aria-label="Instagram – Hurtownia Sylwia">{IG_SVG}</a>
         <a href="{WA_URL}" target="_blank" rel="noopener" aria-label="WhatsApp – napisz do nas">{WA_SVG}</a>
       </div>'''
 
