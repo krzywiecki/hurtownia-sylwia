@@ -263,6 +263,18 @@ SEASON = '''
   </section>'''
 
 
+# On-site photos (not stock) – "Tak to u nas wygląda" gallery on Asortyment and O nas.
+def gallery(wide='<img src="img/flota.webp" alt="Samochody dostawcze Hurtowni Sylwia" loading="lazy">'):
+    return f'''<div class="gallery">
+        <figure class="g-tall"><img src="img/rozmaryn.webp" alt="Rozmaryn w doniczce" loading="lazy"></figure>
+        <figure><img src="img/lawenda.webp" alt="Lawenda w doniczce" loading="lazy"></figure>
+        <figure><img src="img/miechunka.webp" alt="Miechunka (physalis) w opakowaniu" loading="lazy"></figure>
+        <figure class="g-wide">{wide}</figure>
+        <figure><img src="img/jarmuz.webp" alt="Pęczek jarmużu" loading="lazy"></figure>
+        <figure><img src="img/mieta.webp" alt="Pęczek świeżej mięty" loading="lazy"></figure>
+        <figure class="g-hide-sm"><img src="img/bazylia-mix.webp" alt="Bazylia zielona i fioletowa" loading="lazy"></figure>
+      </div>'''
+
 SEAL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm-1.5 15.5-4-4 1.4-1.4 2.6 2.6 6.1-6.1 1.4 1.4z"/></svg>'
 
 # Certificates: PDFs in certyfikaty/certyfikat-<key>.pdf, thumbnails in img/cert-<key>.webp
@@ -491,12 +503,7 @@ asort = page_head("Co u nas znajdziesz", "Asortyment",
         <h2>Tak to u nas wygląda</h2>
         <p>Bez sesji zdjęciowej i stylizacji – zdjęcia robione na miejscu, w Legnicy.</p>
       </div>
-      <div class="gallery">
-        <figure class="g-tall"><img src="img/rozmaryn.webp" alt="Rozmaryn w doniczce" loading="lazy"></figure>
-        <figure><img src="img/tymianek.webp" alt="Świeży tymianek" loading="lazy"></figure>
-        <figure><img src="img/bazylia-mix.webp" alt="Bazylia zielona i fioletowa" loading="lazy"></figure>
-        <figure class="g-wide"><img src="img/mieta-doniczka.webp" alt="Mięta w doniczce" loading="lazy"></figure>
-      </div>
+      {gallery()}
     </div>
   </section>
 
@@ -667,12 +674,7 @@ onas = page_head("O nas", "Rodzinna hurtownia,<br><span>duże serce do warzyw</s
         <p class="hand">Prosto z naszej hurtowni</p>
         <h2>Tak to u nas wygląda</h2>
       </div>
-      <div class="gallery">
-        <figure class="g-tall"><img src="img/rozmaryn.webp" alt="Rozmaryn w doniczce" loading="lazy"></figure>
-        <figure><img src="img/tymianek.webp" alt="Świeży tymianek" loading="lazy"></figure>
-        <figure><img src="img/bazylia-mix.webp" alt="Bazylia zielona i fioletowa" loading="lazy"></figure>
-        <figure class="g-wide"><img src="img/mieta-doniczka.webp" alt="Mięta w doniczce" loading="lazy"></figure>
-      </div>
+      {gallery('<img src="img/tymianek.webp" alt="Świeży tymianek" loading="lazy">')}
       <div class="follow">
         <p>Więcej zdjęć i aktualności znajdziesz na naszym profilu:</p>
         {social()}
