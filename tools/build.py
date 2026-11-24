@@ -329,8 +329,7 @@ PEELED = f'''
         <p><a href="tel:+48782272727" class="btn btn-red">Zapytaj o warzywa obierane</a></p>
       </div>
       <div class="split-photo">
-        <!-- TODO: zdjęcie warzyw obieranych -->
-        <img src="img/stock-warzywa.webp" alt="Świeże warzywa" loading="lazy">
+        <img src="img/warzywa-obierane.webp" alt="Obrane ziemniaki – warzywa obierane z hurtowni Sylwia" width="1200" height="896" loading="lazy">
       </div>
     </div>
   </section>'''
