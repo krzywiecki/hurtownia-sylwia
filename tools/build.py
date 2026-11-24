@@ -129,7 +129,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <p>© <span id="year">2026</span> Hurtownia Sylwia · warzywa i owoce z Legnicy</p>
+    <p>© <span id="year">2026</span> Hurtownia Sylwia · warzywa i owoce z Legnicy · <a href="#" data-cookie-settings>Ustawienia cookies</a></p>
   </div>
 </footer>
 
@@ -151,6 +151,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
   document.querySelectorAll('[data-soon]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<script src="js/cookies.js" defer></script>
 </body>
 </html>
 '''
