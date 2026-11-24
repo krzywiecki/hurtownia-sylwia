@@ -176,10 +176,11 @@ def cities_list():
 
 def b2b_band(title="Prowadzisz restaurację? Współpracuj z nami!",
              text="Sklep, restauracja, kawiarnia czy catering – przygotujemy stałe zamówienie pod Twoją kuchnię i dowieziemy je pod drzwi.",
-             link=True):
+             link=True, img=None):
+    style = f' style="background-image: url(img/{img})"' if img else ""
     more = '<a href="dla-firm.html" class="btn btn-outline-white">Oferta dla firm</a>' if link else ""
     return f'''
-  <section class="b2b">
+  <section class="b2b"{style}>
     <div class="wrap b2b-inner">
       <div>
         <p class="hand hand-light">Dla sklepów i gastronomii</p>
@@ -621,7 +622,7 @@ firmy = page_head("Dla sklepów i gastronomii", "Prowadzisz restaurację?<br><sp
       </div>
     </div>
   </section>
-{b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False)}'''
+{b2b_band("Porozmawiajmy o współpracy", "Zadzwoń – ustalimy asortyment, dni dostaw i warunki dopasowane do Twojego lokalu.", link=False, img="page-dostawa.webp")}'''
 page("dla-firm.html", "Oferta dla firm",
      "Hurtowe dostawy warzyw i owoców, także obieranych, dla restauracji, sklepów, cateringu i firm w całej Polsce. ISO 22000 i HACCP.",
      firmy, og_image="img/page-firmy.webp")
