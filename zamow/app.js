@@ -21,9 +21,6 @@
   // ---------- helpers ----------
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const num = n => Number(n).toLocaleString("pl-PL", { maximumFractionDigits: 2 });
-  const money = n => Number(n).toLocaleString("pl-PL", { style: "currency", currency: "PLN", maximumFractionDigits: 0 });
-  const money2 = n => Number(n).toLocaleString("pl-PL", { style: "currency", currency: "PLN", minimumFractionDigits: 2 });
-  const price = p => p.price * CLIENT.priceFactor;
   const unitLabel = (u, q) => {
     if (u === "karton") return q === 1 ? "karton" : (q % 10 >= 2 && q % 10 <= 4 && (q % 100 < 10 || q % 100 >= 20) ? "kartony" : "kartonów");
     if (u === "doniczka") return q === 1 ? "doniczka" : (q % 10 >= 2 && q % 10 <= 4 && (q % 100 < 10 || q % 100 >= 20) ? "doniczki" : "doniczek");
@@ -33,7 +30,6 @@
   const qtyText = (q, u) => `${num(q)} ${unitLabel(u, q)}`;
   const pic = (p, extra = "") => `<div class="pic ${extra}">${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : `<span aria-hidden="true">${p.emoji}</span>`}${p.peeled && !extra ? '<span class="peeled">obrane</span>' : ""}</div>`;
   const cartLines = () => Object.entries(cart.items).filter(([id]) => byId[id]);
-  const cartTotal = () => cartLines().reduce((s, [id, it]) => s + price(byId[id]) * it.qty, 0);
   const toast = msg => { $toast.textContent = msg; $toast.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => $toast.classList.remove("show"), 2200); };
 
   const dayName = d => d.toLocaleDateString("pl-PL", { weekday: "long" });
@@ -145,7 +141,7 @@
           ${inCart ? `<span class="qty-badge">${qtyText(inCart.qty, p.unit)}</span>` : ""}
           <div class="tile-body">
             <div class="tile-name">${esc(p.name)}</div>
-            <div class="tile-price">${money2(price(p))} / ${p.unit}</div>
+            <div class="tile-price">jedn.: ${p.unit}</div>
             ${last && !inCart ? `<div class="tile-last">Ostatnio: ${qtyText(last.qty, p.unit)}</div>` : ""}
           </div></button>`;
       }).join("") : `<p class="empty" style="grid-column:1/-1">Nie znaleźliśmy „${esc(catState.q)}”.<br>Zadzwoń – sprawdzimy, czy mamy.</p>`;
@@ -181,7 +177,6 @@
                 <b class="line-qty">${qtyText(it.qty, p.unit)}</b>
                 <button class="stp" data-act="inc" data-id="${id}" aria-label="Więcej: ${esc(p.name)}">+</button>
               </div>
-              <span class="line-price">${money(price(p) * it.qty)}</span>
             </div>
           <button class="line-del" data-act="del" data-id="${id}" aria-label="Usuń: ${esc(p.name)}">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 6h12l-1 12H7zm4 2v8h2v-8zm4 0v8h2v-8z"/></svg>
@@ -198,8 +193,7 @@
       <label class="field"><span>Uwagi do zamówienia</span><textarea id="dnote" rows="2" placeholder="np. wejście od zaplecza">${esc(cart.note)}</textarea></label>
       <label class="field"><span>Nazwa lokalu / firmy</span><input id="dcomp" autocomplete="organization" placeholder="np. Berlin Doner Kebap, Galeria Piastów" value="${esc(profile.company)}"></label>
 
-      <div class="total"><span>Razem (szac.)</span><span id="ctotal">${money(cartTotal())}</span></div>
-      <p class="muted small" style="margin-top:0">Ceny według Twojego cennika. Kwota końcowa wg wagi na fakturze.</p>
+      <div class="price-note"><b>Ceny ustalamy indywidualnie</b> – każdy klient ma swój cennik. Wyceny nie ma w aplikacji: kwotę potwierdzimy telefonicznie lub na fakturze (wg wagi).</div>
       <button class="btn btn-red" data-act="submit" style="margin-top:12px">Wyślij zamówienie ✓</button>
       <button class="btn btn-light" data-act="clear" style="margin-top:10px">Wyczyść koszyk</button>`;
 
@@ -221,7 +215,7 @@
       <div class="card">${o.items.map(it => `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)">
         <span>${esc(it.name)}${it.note ? `<br><i class="muted small">${esc(it.note)}</i>` : ""}</span><b style="white-space:nowrap">${qtyText(it.qty, it.unit)}</b></div>`).join("")}
         ${o.note ? `<p class="muted small" style="margin:10px 0 0">Uwagi: ${esc(o.note)}</p>` : ""}
-        <div class="total" style="margin-bottom:0"><span>Razem (szac.)</span><span>${money(o.total)}</span></div>
+        <p class="muted small" style="margin:10px 0 0">Ceny wg Twojego indywidualnego cennika – kwota na fakturze.</p>
       </div>
       <div class="stack" style="margin-top:16px">
         <button class="btn btn-green" data-act="repeat" data-id="${o.id}">↻ Zamów to samo jeszcze raz</button>
@@ -235,7 +229,7 @@
     const onCart = /^#\/koszyk/.test(location.hash) || /^#\/zamowienie/.test(location.hash);
     if (!lines.length || onCart) { $bar.hidden = true; return; }
     $bar.hidden = false;
-    $bar.innerHTML = `<span>Koszyk: ${lines.length} poz.<small>ok. ${money(cartTotal())}</small></span><span class="go">Dalej ›</span>`;
+    $bar.innerHTML = `<span>Koszyk: ${lines.length} poz.</span><span class="go">Dalej ›</span>`;
   }
 
   // ---------- quantity sheet ----------
@@ -248,7 +242,7 @@
     const steps = p.unit === "kg" ? [1, 5, 10, 25] : [1, 2, 5, 10];
 
     $sheet.innerHTML = `<div class="sheet-inner">
-      <div class="sheet-head">${pic(p, "sm")}<div><h3>${esc(p.name)}</h3><div class="muted">${money2(price(p))} / ${p.unit}</div></div>
+      <div class="sheet-head">${pic(p, "sm")}<div><h3>${esc(p.name)}</h3><div class="muted">w ${p.unit === "kg" ? "kilogramach" : "sztukach / opakowaniach"}</div></div>
         <button class="sheet-close" data-s="close" aria-label="Zamknij">×</button></div>
       <label class="display"><input class="num" id="snum" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="0" aria-label="Ilość"><span class="unit" id="sunit"></span></label>
       ${last ? `<div class="chips"><button class="chip chip-last" data-s="set" data-v="${last.qty}">Jak ostatnio: ${qtyText(last.qty, p.unit)}</button></div>` : ""}
@@ -341,9 +335,7 @@
         // update just this row (re-rendering the basket would reload the photos and make them blink)
         const p = byId[t.dataset.id], row = t.closest(".line");
         row.querySelector(".line-qty").textContent = qtyText(n, p.unit);
-        row.querySelector(".line-price").textContent = money(price(p) * n);
         row.querySelector('[data-act="dec"]').disabled = n - 1 <= 0;
-        document.getElementById("ctotal").textContent = money(cartTotal());
       }
       return;
     }
@@ -352,7 +344,6 @@
       delete cart.items[t.dataset.id]; persistCart(); toast(`Usunięto: ${p.name}`);
       if (!cartLines().length) return renderCart();
       t.closest(".line").remove();   // remove in place – no re-render, no blinking photos
-      document.getElementById("ctotal").textContent = money(cartTotal());
       return;
     }
     if (act === "clear" && confirm("Wyczyścić cały koszyk?")) { cart.items = {}; persistCart(); renderCart(); }
@@ -368,8 +359,8 @@
       client: CLIENT.name,
       company: profile.company,
       delivery: cart.delivery, time: cart.time, note: cart.note.trim(),
-      items: lines.map(([id, it]) => ({ id, name: byId[id].name, unit: byId[id].unit, qty: it.qty, note: it.note, price: price(byId[id]) })),
-      total: cartTotal(),
+      items: lines.map(([id, it]) => ({ id, name: byId[id].name, unit: byId[id].unit, qty: it.qty, note: it.note })),
+      pricing: "individual",   // prices per client price list – set by the wholesaler
       status: "zapisane",
     };
     // TODO: POST to backend when accounts/API exist. For now orders live on this device.
@@ -383,6 +374,47 @@
 
   // ---------- PWA ----------
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+  // Install prompt on phones/tablets: shown on every visit in the browser until the app is installed
+  // ("Później" hides it for the current session only).
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const isMobile = isIOS || /Android|Mobi/i.test(ua);
+  const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  let deferredInstall = null;
+  const $install = document.getElementById("install");
+  const SHARE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l4 4-1.4 1.4L13 5.8V15h-2V5.8L9.4 7.4 8 6zM5 10h3v2H6v8h12v-8h-2v-2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1z"/></svg>';
+
+  function showInstall() {
+    if (!isMobile || standalone() || sessionStorage.getItem("sylwia.install.later")) return;
+    const steps = isIOS
+      ? `<ol class="install-steps"><li>Dotknij <b>Udostępnij</b> <span class="ico">${SHARE_SVG}</span> na dole ekranu</li><li>Wybierz <b>„Do ekranu początkowego”</b></li><li>Dotknij <b>Dodaj</b></li></ol>`
+      : deferredInstall ? ""
+      : `<ol class="install-steps"><li>Otwórz menu przeglądarki <b>⋮</b></li><li>Wybierz <b>„Zainstaluj aplikację”</b> lub <b>„Dodaj do ekranu głównego”</b></li></ol>`;
+    $install.innerHTML = `<div class="install-box" role="dialog" aria-modal="true" aria-labelledby="install-h">
+      <img src="icons/icon-192.png" alt="" width="72" height="72">
+      <h2 id="install-h">Zainstaluj aplikację</h2>
+      <p>Dodaj Hurtownię Sylwia do ekranu telefonu – zamówisz jednym dotknięciem, jak z każdej innej aplikacji.</p>
+      ${steps}
+      ${!isIOS && deferredInstall ? `<button class="btn btn-red" data-i="go">Zainstaluj</button>` : ""}
+      <button class="btn btn-light" data-i="later">Później</button></div>`;
+    $install.hidden = false;
+  }
+  $install.addEventListener("click", async e => {
+    const b = e.target.closest("[data-i]"); if (!b) return;
+    if (b.dataset.i === "go" && deferredInstall) {
+      deferredInstall.prompt();
+      const { outcome } = await deferredInstall.userChoice;
+      deferredInstall = null;
+      if (outcome === "accepted") { $install.hidden = true; return; }
+      return showInstall();
+    }
+    if (b.dataset.i === "later") { try { sessionStorage.setItem("sylwia.install.later", "1"); } catch {} $install.hidden = true; }
+  });
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredInstall = e; showInstall(); });
+  window.addEventListener("appinstalled", () => { $install.hidden = true; });
+  // Give Chrome a moment to fire beforeinstallprompt; otherwise fall back to manual steps.
+  setTimeout(() => { if ($install.hidden) showInstall(); }, isIOS ? 600 : 2500);
 
   route();
 })();

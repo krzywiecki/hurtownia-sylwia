@@ -121,6 +121,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
     <nav class="footer-nav" aria-label="Stopka">
       <p class="footer-h">Strony</p>
         {foot_nav}
+        <a href="zamow/">Aplikacja do zamówień</a>
     </nav>
     <div>
       <p class="footer-h">Obserwuj nas</p>

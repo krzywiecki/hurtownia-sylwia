@@ -1,5 +1,5 @@
 // Offline cache for the ordering app. Bump VERSION when files change.
-const VERSION = "sylwia-zamow-v20";
+const VERSION = "sylwia-zamow-v21";
 const ASSETS = ["./", "index.html", "app.css", "app.js", "products.js", "manifest.webmanifest",
   "icons/icon-192.png", "../img/favicon.svg"];
 
@@ -10,7 +10,7 @@ self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
-// Network first (fresh prices/products), cache as fallback when offline.
+// Network first (fresh products), cache as fallback when offline.
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   e.respondWith(

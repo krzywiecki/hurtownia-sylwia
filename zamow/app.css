@@ -233,3 +233,18 @@ h2 { font-size: 23px; margin: 28px 0 12px; }
 .line > .line-row { grid-area: row; margin-top: 0; padding-top: 10px; border-top: 1px dashed var(--line); }
 .toast { width: max-content; }
 .add-more { margin-top: 14px; }
+
+/* Individual pricing note */
+.price-note { margin: 20px 0 6px; padding: 14px 16px; border-radius: var(--radius); background: var(--green-bg); font-size: 17px; line-height: 1.4; }
+.price-note b { display: block; font-size: 19px; margin-bottom: 2px; }
+
+/* Install prompt */
+.install { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.55); display: flex; align-items: flex-end; justify-content: center; padding: 12px 12px calc(12px + var(--safe-b)); }
+.install[hidden] { display: none; }
+.install-box { background: var(--cream); border-radius: 22px; padding: 22px 20px 18px; width: 100%; max-width: 480px; text-align: center; display: grid; gap: 10px; }
+.install-box img { margin: 0 auto; border-radius: 16px; }
+.install-box h2 { margin: 4px 0 0; }
+.install-box p { margin: 0; }
+.install-steps { text-align: left; margin: 4px 0; padding: 12px 16px 12px 36px; background: #fff; border-radius: 14px; }
+.install-steps li + li { margin-top: 6px; }
+.install-steps .ico svg { width: 20px; height: 20px; vertical-align: -3px; fill: #007aff; }
