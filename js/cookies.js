@@ -25,7 +25,7 @@
     box.setAttribute('role', 'region');
     box.setAttribute('aria-label', 'Pliki cookie');
     box.innerHTML =
-      '<p>Używamy plików cookie, żeby strona działała sprawnie.</p>' +
+      '<p>Używamy plików cookie, żeby strona działała sprawnie. <a href="polityka-prywatnosci.html#cookies">Więcej</a></p>' +
       '<div class="cookie-btns">' +
       '<button type="button" class="cookie-ok">OK</button>' +
       '<button type="button" class="cookie-min">Tylko niezbędne</button>' +

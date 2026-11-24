@@ -62,9 +62,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
   <meta property="og:title" content="{full_title}">
   <meta property="og:description" content="{desc}">
   <meta property="og:image" content="{og_image}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {{
@@ -129,7 +127,7 @@ def page(file, title, desc, body, og_image="img/hero-kosz.webp"):
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <p>© <span id="year">2026</span> Hurtownia Sylwia · warzywa i owoce z Legnicy · <a href="#" data-cookie-settings>Ustawienia cookies</a></p>
+    <p>© <span id="year">2026</span> Hurtownia Sylwia · warzywa i owoce z Legnicy · <a href="polityka-prywatnosci.html">Polityka prywatności</a> · <a href="#" data-cookie-settings>Ustawienia cookies</a></p>
   </div>
 </footer>
 
@@ -733,5 +731,73 @@ kontakt = page_head("Zapraszamy", "Kontakt",
 page("kontakt.html", "Kontakt",
      "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Dostawy w całej Polsce.",
      kontakt)
+
+# ---------- Polityka prywatności ----------
+# TODO: uzupełnij pełną nazwę firmy (z CEIDG/KRS), NIP i e-mail administratora.
+ADMIN_NAME = "Hurtownia Sylwia"
+ADMIN_ADDR = "ul. Bydgoska 18, Legnica"
+POLICY_DATE = "24 listopada 2026"
+
+polityka = page_head("Twoje dane są u nas bezpieczne", "Polityka prywatności",
+    "Krótko i konkretnie: jakie dane przetwarzamy, po co i jakie masz prawa.") + f'''
+  <section class="section">
+    <div class="wrap legal">
+      <p class="muted">Obowiązuje od {POLICY_DATE}.</p>
+
+      <h2>1. Administrator danych</h2>
+      <p>Administratorem Twoich danych osobowych jest {ADMIN_NAME}, {ADMIN_ADDR}.
+      W sprawach danych osobowych skontaktuj się z nami telefonicznie: <a href="tel:+48782272727">+48 782 272 727</a> lub osobiście w hurtowni.</p>
+
+      <h2>2. Jakie dane przetwarzamy</h2>
+      <p>Strona nie zawiera formularzy i nie zbiera danych automatycznie w celach marketingowych. Przetwarzamy tylko dane, które sam nam przekażesz, kontaktując się z nami (telefon, WhatsApp, Facebook) lub składając zamówienie:</p>
+      <ul>
+        <li>imię i nazwisko, nazwa firmy, NIP,</li>
+        <li>numer telefonu, adres dostawy,</li>
+        <li>treść zamówienia i korespondencji.</li>
+      </ul>
+
+      <h2>3. Cele i podstawy prawne</h2>
+      <ul>
+        <li>realizacja zamówień, dostaw i umów – art. 6 ust. 1 lit. b RODO,</li>
+        <li>wystawianie faktur i prowadzenie księgowości – art. 6 ust. 1 lit. c RODO,</li>
+        <li>odpowiedź na pytania oraz ewentualne dochodzenie roszczeń – nasz prawnie uzasadniony interes, art. 6 ust. 1 lit. f RODO.</li>
+      </ul>
+
+      <h2>4. Komu przekazujemy dane</h2>
+      <p>Tylko podmiotom, które pomagają nam prowadzić działalność: biuro rachunkowe, firma hostingowa strony, dostawcy usług IT. Dane mogą też trafić do organów państwowych, jeśli wymaga tego prawo. Nie sprzedajemy danych.</p>
+      <p>Jeśli piszesz do nas przez WhatsApp lub Facebook, dane przetwarza także Meta Platforms Ireland Ltd. na zasadach opisanych w jej polityce prywatności.</p>
+
+      <h2>5. Jak długo przechowujemy dane</h2>
+      <ul>
+        <li>dane z zamówień i faktur – przez okres wymagany przepisami podatkowymi (zwykle 5 lat od końca roku),</li>
+        <li>korespondencję – do czasu załatwienia sprawy, a potem przez okres przedawnienia roszczeń.</li>
+      </ul>
+
+      <h2>6. Twoje prawa</h2>
+      <p>Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przeniesienia oraz wniesienia sprzeciwu. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</p>
+      <p>Podanie danych jest dobrowolne, ale bez nich nie zrealizujemy zamówienia.</p>
+
+      <h2 id="cookies">7. Pliki cookie i pamięć przeglądarki</h2>
+      <p>Strona nie używa narzędzi analitycznych ani reklamowych. Zapisujemy w Twojej przeglądarce tylko to, co niezbędne:</p>
+      <ul>
+        <li>Twój wybór w komunikacie o cookies,</li>
+        <li>w <a href="zamow/">aplikacji do zamówień</a> – koszyk, ulubione produkty i historię zamówień. Te dane zostają na Twoim urządzeniu i nie są wysyłane na nasz serwer.</li>
+      </ul>
+      <p>Możesz je w każdej chwili usunąć w ustawieniach przeglądarki. Swój wybór możesz zmienić tutaj: <a href="#" data-cookie-settings>ustawienia cookies</a>.</p>
+
+      <h2>8. Usługi zewnętrzne</h2>
+      <ul>
+        <li><strong>Mapy Google</strong> – na stronie <a href="kontakt.html">Kontakt</a> osadzamy mapę Google (Google Ireland Ltd.). Po jej wyświetleniu Google może zapisać własne pliki cookie i otrzymać Twój adres IP.</li>
+        <li><strong>Facebook i WhatsApp</strong> – na stronie są tylko zwykłe linki. Meta otrzymuje dane dopiero, gdy w nie klikniesz.</li>
+        <li><strong>Czcionki</strong> – są przechowywane na naszym serwerze, nie pobieramy ich od Google.</li>
+      </ul>
+
+      <h2>9. Zmiany polityki</h2>
+      <p>Jeśli zmienimy sposób przetwarzania danych, zaktualizujemy tę stronę i datę na górze.</p>
+    </div>
+  </section>'''
+page("polityka-prywatnosci.html", "Polityka prywatności",
+     "Polityka prywatności i informacja o plikach cookie Hurtowni Sylwia z Legnicy.",
+     polityka)
 
 print("ok")
