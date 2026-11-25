@@ -439,3 +439,6 @@ p { margin: 0 0 1em; }
 .legal li { margin-bottom: .3em; }
 .legal a { color: var(--red); }
 .cookie p a { color: inherit; }
+.b2b-mail { flex-basis: 100%; display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; font-size: 18px; text-decoration: none; opacity: .95; }
+.b2b-mail svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.b2b-mail:hover { text-decoration: underline; }

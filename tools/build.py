@@ -23,6 +23,8 @@ FB_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.
 
 CUR = ' aria-current="page"'
 WA_URL = "https://wa.me/48782272727"
+EMAIL = "fhtbystry@o2.pl"
+MAIL_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>'
 WA_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.4 13.4 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.7a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zm8.4-18.2A11.8 11.8 0 0 0 1.8 17.8L.1 24l6.4-1.7a11.8 11.8 0 0 0 5.6 1.4A11.9 11.9 0 0 0 20.4 3.6z"/></svg>'
 
 CITIES = ["Legnica", "Wrocław", "Lubin", "Głogów", "Polkowice", "Jawor", "Złotoryja",
@@ -81,6 +83,7 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
     "@type": "GroceryStore",
     "name": "Hurtownia Sylwia – warzywa i owoce",
     "telephone": "+48 782 272 727",
+    "email": "{EMAIL}",
     "@id": "{SITE}/#business",
     "url": "{SITE}/",
     "logo": "{SITE}/img/logo.svg",
@@ -135,6 +138,7 @@ def page(file, title, desc, body, og_image="img/hero-warzywa.webp"):
       <p>ul. Bydgoska 18, 59-220 Legnica</p>
       <p>Pn–Pt 3:00–11:00, Sob 5:00–11:00</p>
       <p><a href="tel:+48782272727">+48 782 272 727</a></p>
+      <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
     </div>
     <nav class="footer-nav" aria-label="Stopka">
       <p class="footer-h">Strony</p>
@@ -210,6 +214,7 @@ def b2b_band(title="Prowadzisz restaurację? Współpracuj z nami!",
         <a href="tel:+48782272727" class="btn btn-white">Zadzwoń: 782 272 727</a>
         <a href="{WA_URL}" class="btn btn-wa" target="_blank" rel="noopener">{WA_SVG} WhatsApp</a>
         {more}
+        <a href="mailto:{EMAIL}" class="b2b-mail">{MAIL_SVG}{EMAIL}</a>
       </div>
     </div>
   </section>'''
@@ -726,6 +731,10 @@ kontakt = page_head("Zapraszamy", "Kontakt",
             <div><strong>Telefon</strong><a href="tel:+48782272727">+48 782 272 727</a></div>
           </li>
           <li>
+            <span class="ci-icon">{MAIL_SVG}</span>
+            <div><strong>E-mail</strong><a href="mailto:{EMAIL}">{EMAIL}</a></div>
+          </li>
+          <li>
             <span class="ci-icon ci-wa">{WA_SVG}</span>
             <div><strong>WhatsApp</strong><a href="{WA_URL}" target="_blank" rel="noopener">Napisz do nas</a></div>
           </li>
@@ -754,11 +763,11 @@ kontakt = page_head("Zapraszamy", "Kontakt",
     </div>
   </section>'''
 page("kontakt.html", "Kontakt",
-     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727. Dostawy w całej Polsce.",
+     "Hurtownia Sylwia, Legnica, ul. Bydgoska 18, tel. +48 782 272 727, e-mail: fhtbystry@o2.pl. Dostawy w całej Polsce.",
      kontakt)
 
 # ---------- Polityka prywatności ----------
-# TODO: uzupełnij pełną nazwę firmy (z CEIDG/KRS), NIP i e-mail administratora.
+# TODO: uzupełnij pełną nazwę firmy (z CEIDG/KRS) i NIP.
 ADMIN_NAME = "Hurtownia Sylwia"
 ADMIN_ADDR = "ul. Bydgoska 18, Legnica"
 POLICY_DATE = "24 listopada 2026"
@@ -771,7 +780,7 @@ polityka = page_head("Twoje dane są u nas bezpieczne", "Polityka prywatności",
 
       <h2>1. Administrator danych</h2>
       <p>Administratorem Twoich danych osobowych jest {ADMIN_NAME}, {ADMIN_ADDR}.
-      W sprawach danych osobowych skontaktuj się z nami telefonicznie: <a href="tel:+48782272727">+48 782 272 727</a> lub osobiście w hurtowni.</p>
+      W sprawach danych osobowych skontaktuj się z nami telefonicznie: <a href="tel:+48782272727">+48 782 272 727</a>, e-mailem: <a href="mailto:{EMAIL}">{EMAIL}</a> lub osobiście w hurtowni.</p>
 
       <h2>2. Jakie dane przetwarzamy</h2>
       <p>Strona nie zawiera formularzy i nie zbiera danych automatycznie w celach marketingowych. Przetwarzamy tylko dane, które sam nam przekażesz, kontaktując się z nami (telefon, WhatsApp, Facebook) lub składając zamówienie:</p>
